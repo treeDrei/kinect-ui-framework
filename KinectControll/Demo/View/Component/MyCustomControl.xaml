@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="KinectControll.View.Component.MyCustomControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            Width="400" Height="150">
+    
+    <Grid x:Name="LayoutRoot" Background="White">
+        <Grid HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch" Background="#FF5B5B5B">
+            <Rectangle HorizontalAlignment="Stretch" Margin="11,31,9,9" VerticalAlignment="Stretch" Fill="#FFFFFFFF" Stroke="#FF000000"/>
+            <Button Height="24" HorizontalAlignment="Right" Margin="0,3,13,0" VerticalAlignment="Top" Width="29" Content="X" x:Name="btnClose"/>
+            <Button Height="26" HorizontalAlignment="Stretch" Margin="167,0,155,17" VerticalAlignment="Bottom" Content="Ok" x:Name="btnOk"/>
+            <TextBlock Height="13" Margin="11,9,199,0" VerticalAlignment="Top" Text="My Custom Control" TextWrapping="Wrap" FontSize="12" HorizontalAlignment="Stretch" Foreground="#FFFFFFFF"/>
+            <TextBlock Margin="29,48,33,58" TextAlignment="Center" TextWrapping="Wrap">
+                <Run Text="This "/>
+                <Run FontSize="14.6666666666667" Text="Demo "/>
+                <Run Text="is "/>
+                <LineBreak/>
+                <Run Text="for How to Develop a Custom Control."/>
+            </TextBlock>
+        </Grid>
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,263 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{89A69964-0193-4D85-B363-4E2DF286F5B3}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>KinectControll</RootNamespace>
+    <AssemblyName>KinectControll</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>KinectControll.App</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Research.Kinect, Version=1.0.0.45, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="PureMVC.DotNET.35">
+      <HintPath>..\..\..\..\CSharp\PureMVC_CSharp_3_0\bin\PureMVC.DotNET.35.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="Demo\View\BackgroundView\BackgroundControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Demo\View\DebugView\DebugWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Demo\View\HandView\HandControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CustomToolNamespace>KinectControll.Demo.View.Hand</CustomToolNamespace>
+    </Page>
+    <Page Include="Demo\View\HomeView\HomeControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Demo\View\MenuView\MenuControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Demo\View\MainView\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Check\ICheck.cs" />
+    <Compile Include="Check\Move\MoveCheck.cs" />
+    <Compile Include="Check\Speed\HorizontalSpeedCheck.cs" />
+    <Compile Include="Check\Speed\SpeedCheck.cs" />
+    <Compile Include="Controller\Alignment\AlignmentController.cs" />
+    <Compile Include="Controller\Alignment\CameraController.cs" />
+    <Compile Include="Demo\Controller\Background\SetBackgroundControlCommand.cs" />
+    <Compile Include="Demo\Controller\Image\ShowImageViewControlCommand.cs" />
+    <Compile Include="Demo\Controller\Navigation\NavigateVideoCommand.cs" />
+    <Compile Include="Demo\Controller\Navigation\NavigateImageCommand.cs" />
+    <Compile Include="Demo\Controller\Navigation\NavigateHomeCommand.cs" />
+    <Compile Include="Demo\Controller\Startup\InitializeKinectManagerCommand.cs" />
+    <Compile Include="Demo\Controller\EndApplicationCommand.cs" />
+    <Compile Include="Demo\Controller\Startup\InitializeHandViewCommand.cs" />
+    <Compile Include="Demo\Controller\Startup\InitializeMenuViewCommand.cs" />
+    <Compile Include="Demo\Controller\ShowDebugCommand.cs" />
+    <Compile Include="Demo\Controller\Startup\InitializeBackgroundControlCommand.cs" />
+    <Compile Include="Demo\Controller\Startup\InitializeImageControlCommand.cs" />
+    <Compile Include="Demo\Controller\Startup\InitializeHomeViewCommand.cs" />
+    <Compile Include="Demo\Controller\Startup\StartupCommand.cs" />
+    <Compile Include="Demo\DemoApplicationFacade.cs" />
+    <Compile Include="Demo\View\BackgroundView\BackgroundControl.xaml.cs">
+      <DependentUpon>BackgroundControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demo\View\BaseView\BaseKinectView.cs" />
+    <Compile Include="Demo\View\BaseView\IKinectView.cs" />
+    <Compile Include="Demo\View\HandView\HandView.cs" />
+    <Compile Include="Demo\View\HomeView\HomeControl.xaml.cs">
+      <DependentUpon>HomeControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demo\View\HomeView\HomeMediator.cs" />
+    <Compile Include="Demo\View\HomeView\HomeView.cs" />
+    <Compile Include="Demo\View\ImageView\ImageView.cs" />
+    <Compile Include="Demo\View\MenuView\Event\MenuEventArgs.cs" />
+    <Compile Include="Demo\View\MenuView\MenuView.cs" />
+    <Compile Include="Demo\View\MenuView\ImageButton.cs" />
+    <Compile Include="Demo\View\MenuView\MenuControl.xaml.cs">
+      <DependentUpon>MenuControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demo\View\DebugView\DebugMediator.cs" />
+    <Compile Include="Demo\View\DebugView\DebugWindow.xaml.cs">
+      <DependentUpon>DebugWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demo\View\HandView\HandControl.xaml.cs">
+      <DependentUpon>HandControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demo\View\HandView\HandMediator.cs" />
+    <Compile Include="Demo\View\MenuView\MenuMediator.cs" />
+    <Compile Include="Demo\View\BackgroundView\BackgroundMediator.cs" />
+    <Compile Include="Demo\View\ImageView\ImageControl.xaml.cs">
+      <DependentUpon>ImageControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demo\View\ImageView\ImageMediator.cs" />
+    <Compile Include="Demo\View\MainView\MainMediator.cs" />
+    <Compile Include="Check\Distance\DistanceCheck.cs" />
+    <Compile Include="Check\TargetCheck.cs" />
+    <Compile Include="Manager\Alignment\AlignmentAnalysis.cs" />
+    <Compile Include="Model\Alignment\CameraVO.cs" />
+    <Compile Include="Manager\Alignment\CameraPositioning.cs" />
+    <Compile Include="Manager\Alignment\KinectAlignmentManager.cs" />
+    <Compile Include="Manager\Collision\KinectCollisionManager.cs" />
+    <Compile Include="Manager\Data\ADataManager.cs" />
+    <Compile Include="Manager\Data\Event\DataManagerEventArgs.cs" />
+    <Compile Include="Manager\Data\IDataManager.cs" />
+    <Compile Include="Manager\Data\KinectDataManager.cs" />
+    <Compile Include="Manager\Data\KinectDataVO.cs" />
+    <Compile Include="Manager\Data\Position.cs" />
+    <Compile Include="Manager\Item\Dragable.cs" />
+    <Compile Include="Manager\Item\KinectItemManager.cs" />
+    <Compile Include="Manager\Item\Swypeable\Event\KinectSwypeableEventArgs.cs" />
+    <Compile Include="Manager\Item\Swypeable\KinectSwypeable2.cs" />
+    <Compile Include="Manager\Item\Swypeable\KinectSwypeable.cs" />
+    <Compile Include="Manager\Pose\KinectPoseItem.cs" />
+    <Compile Include="Manager\Pose\Event\KinectPoseManagerEventArgs.cs" />
+    <Compile Include="Manager\Pose\Idle.cs" />
+    <Compile Include="Manager\Pose\IPose.cs" />
+    <Compile Include="Manager\Pose\KinectPoseManager.cs" />
+    <Compile Include="Manager\Input\KinectInputManager.cs" />
+    <Compile Include="Manager\Input\Event\KinectInputManagerEventArgs.cs" />
+    <Compile Include="Manager\Item\ItemDecorator.cs" />
+    <Compile Include="Manager\Item\KinectItem.cs" />
+    <Compile Include="Manager\Item\Selectable\KinectSelectable.cs" />
+    <Compile Include="Manager\KinectManager.cs" />
+    <Compile Include="Demo\View\MainView\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Demo\View\Component\MyCustomControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Demo\View\ImageView\ImageControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Demo\View\Component\MyCustomControl.xaml.cs">
+      <DependentUpon>MyCustomControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\Singleton.cs" />
+    <Compile Include="Calculation\MathUtil.cs" />
+    <Compile Include="Controller\Threading\ThreadController.cs" />
+    <Compile Include="Model\Alignment\AlignmentModel.cs" />
+    <Compile Include="Model\Threading\ThreadModel.cs" />
+    <Compile Include="Pattern\SingletonProvider.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\Phone.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\Question.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\img\hand.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\img\video.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\img\image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Demo\View\VideoView\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\img\demo1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\img\demo2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\img\home.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
