@@ -1,0 +1,13 @@
+﻿<UserControl x:Class="KinectControll.Demo.View.HandView.HandControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            Width="525" Height="525" HorizontalAlignment="Left" VerticalAlignment="Top">
+    
+    <Grid Name="Root">
+        <Canvas Name="MainCanvas" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Image Canvas.Left="-75" Canvas.Top="-151" Height="55" Name="hand" Stretch="Fill" Width="55" Source="/KinectControll;component/assets/img/hand.png" />
+        </Canvas>
+        
+    </Grid>
+    
+</UserControl>

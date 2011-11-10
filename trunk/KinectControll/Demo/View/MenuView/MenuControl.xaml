@@ -1,0 +1,13 @@
+﻿<UserControl x:Class="KinectControll.Demo.View.MenuView.MenuControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="525" d:DesignWidth="525" HorizontalAlignment="Left" VerticalAlignment="Top" Name="MenuControlName">
+    <Grid Name="BaseGrid">
+        <Image Height="70" HorizontalAlignment="Left" Margin="237,180,0,0" Name="videoButton" Stretch="Fill" VerticalAlignment="Top" Width="70" Source="/KinectControll;component/assets/img/image.png" />
+        <Image Height="70" HorizontalAlignment="Left" Margin="60,180,0,0" Name="imageButton" Stretch="Fill" VerticalAlignment="Top" Width="70" Source="/KinectControll;component/assets/img/video.png" />
+        <Image Height="70" HorizontalAlignment="Left" Margin="424,180,0,0" Name="image1" Source="/KinectControll;component/assets/Phone.png" Stretch="Fill" VerticalAlignment="Top" Width="70" />
+    </Grid>
+</UserControl>
