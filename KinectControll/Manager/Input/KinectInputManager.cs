@@ -11,6 +11,10 @@ using KinectControll.Manager.Input.Event;
 using KinectControll.Manager.Data.Event;
 using KinectControll.Manager.Data;
 
+using System.Windows.Input;
+
+using KinectControll.Model.Alignment;
+
 namespace KinectControll.Manager.Input
 {
     public class KinectInputManager
@@ -18,6 +22,22 @@ namespace KinectControll.Manager.Input
         private Boolean isStarted = false;
          
         #region Singleton instantiation
+        /**
+         * Nested calss can only be called by ItemManager
+         */
+        private class SingletonCreator
+        {
+            /**
+             * Nested class constructor will never be used
+             */
+            static SingletonCreator() { }
+
+            /**
+             * Instance will call private Singletor constructor
+             */
+            internal static readonly KinectInputManager instance = new KinectInputManager();
+        }
+        #endregion
         /**
          * Singleton can't be instantiated from outside
          */
@@ -61,16 +81,25 @@ namespace KinectControll.Manager.Input
 
         void UpdateHandler(object sender, DataManagerEventArgs e)
         {
+            double xValue = 0;
+            double yValue = 0;
             // Use values accoring to used hand
             if (isLeft && e.LeftHand != null)
             {
-                SetInput(e.LeftHand.X, e.LeftHand.Y);
+                xValue = e.LeftHand.X;
+                yValue = e.LeftHand.Y;
             }
             // Can't be updated if data is null
             else if(!isLeft && e.RightHand != null)
             {
-                SetInput(e.RightHand.X, e.RightHand.Y);
+                xValue = e.RightHand.X;
+                yValue = e.RightHand.Y;
             }
+
+            xValue += (AlignmentModel.Instance.Offset.X);
+            yValue += (AlignmentModel.Instance.Offset.Y);
+            SetInput(xValue, yValue);
+
         }
 
         /**
@@ -84,23 +113,6 @@ namespace KinectControll.Manager.Input
                 return SingletonCreator.instance;
             }
         }
-
-        /**
-         * Nested calss can only be called by ItemManager
-         */
-        private class SingletonCreator
-        {
-            /**
-             * Nested class constructor will never be used
-             */
-            static SingletonCreator() { }
-            
-            /**
-             * Instance will call private Singletor constructor
-             */
-            internal static readonly KinectInputManager instance = new KinectInputManager();
-        }
-        #endregion
 
         public void Start()
         {
@@ -142,18 +154,15 @@ namespace KinectControll.Manager.Input
 
         private Point point;
 
-        public void SetInput(float handX, float handY)
+        public void SetInput(double handX, double handY)
         {
+            // Conrete x/y value on application
             double x = 0;
             double y = 0;
 
-            
-            y = height / 2 - (handY * height / 2);
-            x = width / 2 - ((-1 * handX) * width / 2);
-
-            x *= multiplyer;
-            y *= multiplyer;
-
+            // Conversion from normateds value to 
+            x = (multiplyer * .5 * handX + .5) * width;
+            y = (multiplyer * - .5 * handY + .5) * height;
 
             if (x < 0)
             {
@@ -175,6 +184,13 @@ namespace KinectControll.Manager.Input
 
             // Triggers event TEST
             this.TriggerChanged(x, y);
+
+            Console.WriteLine(width + " / " + height + " -- " + handX + " / " + handY + " -> " + x + " / " + y);
+            /*
+            Cursor. cursor;// = new Cursor(Cursor.Current.Handle);
+            cursor.Position = new Point(Cursor.Position.X - 50, Cursor.Position.Y - 50);
+            //Mouse.OverrideCursor = Cursor.
+             * */
         }
         
         public void SetInputJoints(Joint leftHand, Joint rightHand)

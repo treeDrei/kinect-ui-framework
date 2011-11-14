@@ -5,7 +5,7 @@
     
     <Grid Name="Root">
         <Canvas Name="MainCanvas" HorizontalAlignment="Left" VerticalAlignment="Top">
-            <Image Canvas.Left="-75" Canvas.Top="-151" Height="55" Name="hand" Stretch="Fill" Width="55" Source="/KinectControll;component/assets/img/hand.png" />
+            <Image Height="55" Name="hand" Stretch="Fill" Width="55" Source="/KinectControll;component/assets/img/hand.png" />
         </Canvas>
         
     </Grid>

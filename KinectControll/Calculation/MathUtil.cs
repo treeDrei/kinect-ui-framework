@@ -10,7 +10,7 @@ namespace KinectControll.Calculation
         /**
          * Calculates gradient of line between two points
          */
-        public static float CalculateGradient(float x1, float y1, float x2, float y2)
+        public static double CalculateGradient(double x1, double y1, double x2, double y2)
         {
             return (y2 - y1) / (x2 - x1);
         }
@@ -18,7 +18,7 @@ namespace KinectControll.Calculation
         /**
          * Calculates straight between two 
          */
-        public static double CalculateAngle(float m1, float m2)
+        public static double CalculateAngle(double m1, double m2)
         {
             return RadianToDegree(Math.Atan(Math.Abs((m1 - m2) / (1 + (m1 * m2)))));
         }

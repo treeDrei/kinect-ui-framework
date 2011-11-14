@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\Peer\Dropbox\KinectControll\KinectControll\obj\x86\Debug\
+C:\Users\Peer\Dropbox\kinect-ui-framework\KinectControll\obj\x86\Debug\
 KinectControll
 none
 false
 DEBUG;TRACE
-C:\Users\Peer\Dropbox\KinectControll\KinectControll\App.xaml
+C:\Users\Peer\Dropbox\kinect-ui-framework\KinectControll\App.xaml
 845870840
 
-84-653905007
-14-929556524
+84-1487393940
+14-2064887514
 Demo\View\BackgroundView\BackgroundControl.xaml;Demo\View\DebugView\DebugWindow.xaml;Demo\View\HandView\HandControl.xaml;Demo\View\HomeView\HomeControl.xaml;Demo\View\MenuView\MenuControl.xaml;Demo\View\MainView\MainWindow.xaml;Demo\View\Component\MyCustomControl.xaml;Demo\View\ImageView\ImageControl.xaml;
 
 True

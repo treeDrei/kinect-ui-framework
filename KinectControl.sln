@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KinectControll", "KinectControll\KinectControll.csproj", "{89A69964-0193-4D85-B363-4E2DF286F5B3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KinectControl", "KinectControll\KinectControl.csproj", "{89A69964-0193-4D85-B363-4E2DF286F5B3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

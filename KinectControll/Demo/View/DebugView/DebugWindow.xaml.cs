@@ -96,13 +96,17 @@ namespace KinectControll.Demo.View.DebugView
 
             //debugOutput.Content = joint.Position.X + " / " + joint.Position.Y;
 
-            Canvas.SetLeft(ellipse, 320 - ((-1 * joint.Position.X) * 320));
-            Canvas.SetTop(ellipse, 240 - (joint.Position.Y * 240));
+            //Canvas.SetLeft(ellipse, 320 - ((-1 * joint.Position.X) * 320));
+            //Canvas.SetTop(ellipse, 240 - (joint.Position.Y * 240));
 
-            
-            float size = 50 / (joint.Position.Z + 1)*3;
+
+            float size = 50 / (joint.Position.Z + 1) * 3;
             ellipse.Width = size;
             ellipse.Height = size;
+
+            Canvas.SetLeft(ellipse, (-1 * joint.Position.X * 320) - size/2);
+            Canvas.SetTop(ellipse, (-1* joint.Position.Y * 240)-size/2);
+            
             
         }
 
