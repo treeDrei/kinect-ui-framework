@@ -34,15 +34,15 @@ namespace KinectControll.Demo.View.HomeView
         public event EventHandler OnNavigation;
         
         public HomeView()
-            : base("HomeView", new MenuControl())
+            : base("HomeView", new HomeControl())
         {
             buttons = new Dictionary<string, UIElement>();
             
             // Type cast (uses polymorphism) to concret type
-            MenuControl homeControl = (MenuControl)userControl;
+            HomeControl homeControl = (HomeControl)userControl;
 
             //phoneButton = new ImageButton("phoneButton");
-            CreateButton("imageButton", homeControl.homeButton);   
+            CreateButton("homeButton", homeControl.homeButton);   
         }
 
         #region Component Initialization

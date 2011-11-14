@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace KinectControll.Manager.Pose
+namespace KinectControll.Model.Pose
 {
-    class KinectPoseItem
+    class PoseItem
     {
         private IPose pose;
         private int counter = 0;
@@ -13,7 +13,7 @@ namespace KinectControll.Manager.Pose
         /**
          * Stores a pose and checks wether it hase been activated
          */
-        public KinectPoseItem(IPose pose)
+        public PoseItem(IPose pose)
         {
             this.pose = pose;
         }

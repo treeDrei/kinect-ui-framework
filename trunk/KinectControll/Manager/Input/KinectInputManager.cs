@@ -185,7 +185,6 @@ namespace KinectControll.Manager.Input
             // Triggers event TEST
             this.TriggerChanged(x, y);
 
-            Console.WriteLine(width + " / " + height + " -- " + handX + " / " + handY + " -> " + x + " / " + y);
             /*
             Cursor. cursor;// = new Cursor(Cursor.Current.Handle);
             cursor.Position = new Point(Cursor.Position.X - 50, Cursor.Position.Y - 50);

@@ -41,9 +41,10 @@ namespace KinectControll.Manager
             inputManager = KinectInputManager.Instance;
             inputManager.Start();
             // Creates pose manager
-            /*
+            
             poseManager = KinectPoseManager.Instance;
             //poseManager.CalculateAngles(0, 20, -10, 0, 10, 0);
+            /*
             KinectPoseItem idleItem = poseManager.RegisterPose(new Idle());
             // Event handling for idle events
             idleItem.OnPoseBegin += new EventHandler(IdleBeginHandler);

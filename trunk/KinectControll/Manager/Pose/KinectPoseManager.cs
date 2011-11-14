@@ -12,21 +12,19 @@ using Microsoft.Research.Kinect.Nui;
 // 
 using KinectControll.Manager.Data.Event;
 using KinectControll.Manager.Data;
+// Required to run through poses
+using KinectControll.Model.Pose;
 
 namespace KinectControll.Manager.Pose
 {
     class KinectPoseManager
     {
-        // Stores added poses
-        private List<KinectPoseItem> poseList;
-                
         #region Singleton instantiation
         /**
          * Singleton can't be instantiated from outside
          */
         private KinectPoseManager() 
         {
-            poseList = new List<KinectPoseItem>();
             KinectDataManager.Instance.OnFixedUpdate += new EventHandler<DataManagerEventArgs>(FixedUpdateHandler);
         }
 
@@ -55,50 +53,11 @@ namespace KinectControll.Manager.Pose
             internal static readonly KinectPoseManager instance = new KinectPoseManager();
         }
         #endregion
-
-        /**
-         * Registers a new pose
-         */
-        public KinectPoseItem RegisterPose(IPose pose)
-        {
-            KinectPoseItem newItem = null;
-            poseList.ForEach(
-                delegate(KinectPoseItem item)
-                {
-                    // Check wether pose type is matching existing pose item
-                    if (item.Pose.GetType() == pose.GetType())
-                    {
-                        // Assign to return value
-                        newItem = item;
-                    }
-                }
-            );
-
-            // This pose hasn't been used before
-            if (newItem == null)
-            {
-                // Create new
-                newItem = new KinectPoseItem(pose);
-                poseList.Add(newItem);
-            }
-            
-            //Return a new item if this pose hasn't been registered before
-            return newItem;
-
-            /*
-            // Existing poses won't be added twice
-            if (!poseList.Contains(pose))
-            {
-                poseList.Add(pose);
-            }
-
-            // Shows wether a new item has been added
-            return !poseList.Contains(pose);
-            */
-        }
                
         /**
-         * 
+         * This amazing mathematic function will take three twodimensional points on an X/Y diagramm and will use them to 
+         * calculate the angles between them. These angles make up an triangle wich applied to the human physology can be matched
+         * to poses
          */
         public void CalculateAngles(double headX, double headY, double leftX, double leftY, double rightX, double rightY)
         {
@@ -108,12 +67,15 @@ namespace KinectControll.Manager.Pose
 
             double angleLeft = MathUtil.CalculateAngle(mHeadLeft, mRightLeft);
             double angleRight = MathUtil.CalculateAngle(mHeadRight, mRightLeft);
-            double angleHead = 180 - (angleLeft + angleRight);
+            // head angle can be calculated with left and right angle. If left and right angles are correct, headn angle has to be also correct.
+            //double angleHead = 180 - (angleLeft + angleRight);
+
+            Console.WriteLine("aL: " + angleLeft + ", aR: " + angleRight);
 
             // Check all poses 
-            poseList.ForEach
+            PoseModel.Instance.PoseList().ForEach
             (
-                delegate(KinectPoseItem item)
+                delegate(PoseItem item)
                 {
                     // Pose retreived for easy angle checking
                     IPose pose = item.Pose;

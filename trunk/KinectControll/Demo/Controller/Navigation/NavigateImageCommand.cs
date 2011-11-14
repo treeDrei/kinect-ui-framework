@@ -19,7 +19,7 @@ namespace KinectControll.Demo.Controller.Navigation
         public override void Execute(INotification notification)
         {
             // Change background
-            SendNotification(DemoApplicationFacade.SET_BACKGROUND, "D:/Programmierung/Kinect/KinectControll/KinectControll/KinectControll/assets/img/red.jpg");
+            SendNotification(DemoApplicationFacade.SET_BACKGROUND, "C:/Users/Peer/Dropbox/kinect-ui-framework/KinectControll/assets/img/red.jpg");
 
             // Change menu view state
             MenuMediator menuMediator = (MenuMediator)Facade.RetrieveMediator(MenuMediator.NAME);

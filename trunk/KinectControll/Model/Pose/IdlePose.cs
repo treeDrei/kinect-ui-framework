@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace KinectControll.Manager.Pose
+namespace KinectControll.Model.Pose
 {
-    class Idle : IPose
+    class IdlePose : IPose
     {
 
         /**

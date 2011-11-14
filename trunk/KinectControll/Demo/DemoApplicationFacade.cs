@@ -11,6 +11,7 @@ using KinectControll.Demo.Controller;
 using KinectControll.Demo.Controller.Navigation;
 using KinectControll.Demo.Controller.Startup;
 using KinectControll.Demo.Controller.Background;
+using KinectControll.Demo.Controller.Calibration;
 
 namespace KinectControll.Demo
 {
@@ -28,8 +29,12 @@ namespace KinectControll.Demo
         public const String INITIALIZE_IMAGE_VIEW               = "initializeImageView";
         public const String INITIALIZE_HOME_VIEW                = "initializeHomeView";
         public const String INITIALIZE_BACKGROUND_CONTROL       = "initializeBackgourndControl";
+        public const String INITIALIZE_POSE_VIEW                = "initializePoseView";
+        public const String INITIALIZE_CALIBRATION_VIEW         = "initializeCalibrationView";
 
         public const String APPLICATION_CLOSE                   = "applicationClose";
+
+        public const String CALIBRATION                         = "calibration";
 
         public const String NAVIGATE_HOME                       = "navigateHome";
         public const String NAVIGATE_IMAGE                      = "navigateImage";
@@ -108,13 +113,18 @@ namespace KinectControll.Demo
             RegisterCommand(INITIALIZE_BUTTONS_CONTROL, typeof(InitializeMenuViewCommand));
             RegisterCommand(INITIALIZE_IMAGE_VIEW, typeof(InitializeImageControlCommand));
             RegisterCommand(INITIALIZE_BACKGROUND_CONTROL, typeof(InitializeBackgroundControlCommand));
-            RegisterCommand(INITIALIZE_HOME_VIEW, typeof(InitializeHomeViewCommand));
+            RegisterCommand(INITIALIZE_HOME_VIEW, typeof(InitializeHomeCommand));
+            RegisterCommand(INITIALIZE_POSE_VIEW, typeof(InitializePoseViewCommand));
+            RegisterCommand(INITIALIZE_CALIBRATION_VIEW, typeof(InitializeCalibrationCommand));
 
             // Background manipulation
             RegisterCommand(SET_BACKGROUND, typeof(SetBackgroundControlCommand));
 
             // Closes all windows and stops kinect manager
             RegisterCommand(APPLICATION_CLOSE, typeof(EndApplicationCommand));
+
+            // Requests calibration
+            RegisterCommand(CALIBRATION, typeof(CalibrationCommand));
 
             // Navigation
             RegisterCommand(NAVIGATE_HOME, typeof(NavigateHomeCommand));

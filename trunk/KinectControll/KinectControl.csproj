@@ -70,6 +70,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Demo\View\CalibrationView\CalibrationControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Demo\View\DebugView\DebugWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -78,6 +82,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CustomToolNamespace>KinectControll.Demo.View.Hand</CustomToolNamespace>
+    </Page>
+    <Page Include="Demo\View\PoseView\PoseControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Demo\View\HomeView\HomeControl.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -102,10 +110,13 @@
     <Compile Include="Controller\Alignment\AlignmentController.cs" />
     <Compile Include="Controller\Alignment\CameraController.cs" />
     <Compile Include="Demo\Controller\Background\SetBackgroundControlCommand.cs" />
+    <Compile Include="Demo\Controller\Calibration\CalibrationCommand.cs" />
     <Compile Include="Demo\Controller\Image\ShowImageViewControlCommand.cs" />
     <Compile Include="Demo\Controller\Navigation\NavigateVideoCommand.cs" />
     <Compile Include="Demo\Controller\Navigation\NavigateImageCommand.cs" />
     <Compile Include="Demo\Controller\Navigation\NavigateHomeCommand.cs" />
+    <Compile Include="Demo\Controller\Startup\InitializeCalibrationViewCommand.cs" />
+    <Compile Include="Demo\Controller\Startup\InitializePoseViewCommand.cs" />
     <Compile Include="Demo\Controller\Startup\InitializeKinectManagerCommand.cs" />
     <Compile Include="Demo\Controller\EndApplicationCommand.cs" />
     <Compile Include="Demo\Controller\Startup\InitializeHandViewCommand.cs" />
@@ -113,15 +124,27 @@
     <Compile Include="Demo\Controller\ShowDebugCommand.cs" />
     <Compile Include="Demo\Controller\Startup\InitializeBackgroundControlCommand.cs" />
     <Compile Include="Demo\Controller\Startup\InitializeImageControlCommand.cs" />
-    <Compile Include="Demo\Controller\Startup\InitializeHomeViewCommand.cs" />
+    <Compile Include="Demo\Controller\Startup\InitializeHomeCommand.cs" />
     <Compile Include="Demo\Controller\Startup\StartupCommand.cs" />
     <Compile Include="Demo\DemoApplicationFacade.cs" />
+    <Compile Include="Demo\Pose\HomePose\HomePoseMediator.cs" />
+    <Compile Include="Demo\Pose\PoseMediator.cs" />
     <Compile Include="Demo\View\BackgroundView\BackgroundControl.xaml.cs">
       <DependentUpon>BackgroundControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Demo\View\BaseView\BaseKinectView.cs" />
     <Compile Include="Demo\View\BaseView\IKinectView.cs" />
+    <Compile Include="Demo\View\CalibrationView\CalibrationControl.xaml.cs">
+      <DependentUpon>CalibrationControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demo\View\CalibrationView\CalibrationMediator.cs" />
+    <Compile Include="Demo\View\CalibrationView\CalibrationView.cs" />
     <Compile Include="Demo\View\HandView\HandView.cs" />
+    <Compile Include="Demo\View\PoseView\PoseControl.xaml.cs">
+      <DependentUpon>PoseControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demo\View\PoseView\PoseMediator.cs" />
+    <Compile Include="Demo\View\PoseView\PoseView.cs" />
     <Compile Include="Demo\View\HomeView\HomeControl.xaml.cs">
       <DependentUpon>HomeControl.xaml</DependentUpon>
     </Compile>
@@ -152,7 +175,9 @@
     <Compile Include="Check\Distance\DistanceCheck.cs" />
     <Compile Include="Check\TargetCheck.cs" />
     <Compile Include="Manager\Alignment\AlignmentAnalysis.cs" />
+    <Compile Include="Model\Pose\HomePose.cs" />
     <Compile Include="Model\Alignment\CameraVO.cs" />
+    <Compile Include="Model\Pose\PoseModel.cs" />
     <Compile Include="Threading\Alignment\AlignmentThread.cs" />
     <Compile Include="Manager\Collision\KinectCollisionManager.cs" />
     <Compile Include="Manager\Data\ADataManager.cs" />
@@ -166,10 +191,10 @@
     <Compile Include="Manager\Item\Swypeable\Event\KinectSwypeableEventArgs.cs" />
     <Compile Include="Manager\Item\Swypeable\KinectSwypeable2.cs" />
     <Compile Include="Manager\Item\Swypeable\KinectSwypeable.cs" />
-    <Compile Include="Manager\Pose\KinectPoseItem.cs" />
+    <Compile Include="Model\Pose\PoseItem.cs" />
     <Compile Include="Manager\Pose\Event\KinectPoseManagerEventArgs.cs" />
-    <Compile Include="Manager\Pose\Idle.cs" />
-    <Compile Include="Manager\Pose\IPose.cs" />
+    <Compile Include="Model\Pose\IdlePose.cs" />
+    <Compile Include="Model\Pose\IPose.cs" />
     <Compile Include="Manager\Pose\KinectPoseManager.cs" />
     <Compile Include="Manager\Input\KinectInputManager.cs" />
     <Compile Include="Manager\Input\Event\KinectInputManagerEventArgs.cs" />
@@ -194,7 +219,7 @@
     <Compile Include="Demo\View\Component\MyCustomControl.xaml.cs">
       <DependentUpon>MyCustomControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Manager\Singleton.cs" />
+    <Compile Include="Pattern\Singleton.cs" />
     <Compile Include="Calculation\MathUtil.cs" />
     <Compile Include="Controller\Threading\ThreadController.cs" />
     <Compile Include="Model\Alignment\AlignmentModel.cs" />
@@ -241,7 +266,7 @@
     <Resource Include="assets\img\image.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Demo\View\VideoView\" />
+    <Resource Include="assets\img\calibration.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="assets\img\demo1.jpg" />
@@ -251,6 +276,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="assets\img\home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\img\HomePose.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\img\IdlePose.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\img\IdlePose2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\IdlePose.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
