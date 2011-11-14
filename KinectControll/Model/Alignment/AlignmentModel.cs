@@ -51,8 +51,9 @@ namespace KinectControll.Model.Alignment
         /**
          * Stores a thread
          */
-        public void SetCameraVO(int angle, CameraVO vo)
+        public void RegisterCameraVO(int angle, CameraVO vo)
         {
+            RemoveCameraVO(angle);
             _cameraVOs.Add(angle, vo);
         }
 
@@ -67,10 +68,13 @@ namespace KinectControll.Model.Alignment
         /**
          * Removes a thread from storage and kills it
          */
-        public void RemoveVO(int angle)
+        public void RemoveCameraVO(int angle)
         {
-            // Remove from list
-            _cameraVOs.Remove(angle);
+            if(_cameraVOs.ContainsKey(angle))
+            {
+                // Remove from list
+                _cameraVOs.Remove(angle);
+            }
         }
 
         #region Getter and setter methods

@@ -27,3 +27,7 @@ C:\Users\Peer\Dropbox\kinect-ui-framework\KinectControll\obj\x86\Debug\KinectCon
 C:\Users\Peer\Dropbox\kinect-ui-framework\KinectControll\obj\x86\Debug\KinectControll.Properties.Resources.resources
 C:\Users\Peer\Dropbox\kinect-ui-framework\KinectControll\obj\x86\Debug\GenerateResource.read.1.tlog
 C:\Users\Peer\Dropbox\kinect-ui-framework\KinectControll\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Peer\Dropbox\kinect-ui-framework\KinectControll\obj\x86\Debug\Demo\View\PoseView\PoseControl.baml
+C:\Users\Peer\Dropbox\kinect-ui-framework\KinectControll\obj\x86\Debug\Demo\View\PoseView\PoseControl.g.cs
+C:\Users\Peer\Dropbox\kinect-ui-framework\KinectControll\obj\x86\Debug\Demo\View\CalibrationView\CalibrationControl.baml
+C:\Users\Peer\Dropbox\kinect-ui-framework\KinectControll\obj\x86\Debug\Demo\View\CalibrationView\CalibrationControl.g.cs

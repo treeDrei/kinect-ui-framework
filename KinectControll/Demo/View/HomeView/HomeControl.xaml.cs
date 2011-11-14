@@ -25,9 +25,9 @@ namespace KinectControll.Demo.View.HomeView
     /// <summary>
     /// Interaktionslogik für ButtonsControl.xaml
     /// </summary>
-    public partial class MenuControl : UserControl
+    public partial class HomeControl : UserControl
     {
-        public MenuControl()
+        public HomeControl()
         {
             InitializeComponent();
         }

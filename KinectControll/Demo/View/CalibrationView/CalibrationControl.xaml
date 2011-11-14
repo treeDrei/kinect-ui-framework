@@ -1,0 +1,11 @@
+﻿<UserControl x:Class="KinectControll.Demo.View.CalibrationView.CalibrationControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="525" d:DesignWidth="525" HorizontalAlignment="Left" VerticalAlignment="Top" Name="MenuControlName">
+    <Grid Name="BaseGrid">
+        <Image Height="70" HorizontalAlignment="Left" Margin="12,410,0,0" Name="calibrationButton" Stretch="Fill" VerticalAlignment="Top" Width="70" Source="/KinectControll;component/assets/img/calibration.png" />
+    </Grid>
+</UserControl>

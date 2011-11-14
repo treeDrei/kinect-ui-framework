@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Peer\Dropbox\kinect-ui-framework\KinectControll\App.xaml
-845870840
+10797852307
 
-84-1487393940
+97449701688
 14-2064887514
-Demo\View\BackgroundView\BackgroundControl.xaml;Demo\View\DebugView\DebugWindow.xaml;Demo\View\HandView\HandControl.xaml;Demo\View\HomeView\HomeControl.xaml;Demo\View\MenuView\MenuControl.xaml;Demo\View\MainView\MainWindow.xaml;Demo\View\Component\MyCustomControl.xaml;Demo\View\ImageView\ImageControl.xaml;
+Demo\View\BackgroundView\BackgroundControl.xaml;Demo\View\CalibrationView\CalibrationControl.xaml;Demo\View\DebugView\DebugWindow.xaml;Demo\View\HandView\HandControl.xaml;Demo\View\PoseView\PoseControl.xaml;Demo\View\HomeView\HomeControl.xaml;Demo\View\MenuView\MenuControl.xaml;Demo\View\MainView\MainWindow.xaml;Demo\View\Component\MyCustomControl.xaml;Demo\View\ImageView\ImageControl.xaml;
 
 True
 

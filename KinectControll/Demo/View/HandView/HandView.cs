@@ -13,7 +13,9 @@ using System.Windows.Media.Animation;
 
 using KinectControll.Manager.Input;
 using KinectControll.Manager.Input.Event;
-using KinectControll.Manager.Pose;
+
+// Required to get the pose list
+using KinectControll.Model.Pose;
 
 using System.Windows;
 
@@ -30,8 +32,7 @@ namespace KinectControll.Demo.View.HandView
             KinectInputManager inputManager = KinectInputManager.Instance;
             inputManager.OnChanged += new EventHandler<KinectInputManagerEventArgs>(ControlChangedHandler);
 
-            KinectPoseManager poseManager = KinectPoseManager.Instance;
-            KinectPoseItem idleItem = poseManager.RegisterPose(new Idle());
+            PoseItem idleItem = PoseModel.Instance.RegisterPose(new IdlePose());
             idleItem.OnPoseBegin += new EventHandler(IdleBeginHandler);
             idleItem.OnPoseComplete += new EventHandler(IdleEndHandler);
             idleItem.OnPoseFailed += new EventHandler(IdleEndHandler);
@@ -107,7 +108,6 @@ namespace KinectControll.Demo.View.HandView
             // Type cast to conrete type
             HandControl handControl = (HandControl)userControl;
 
-            Console.WriteLine("Set hand y to " +e.yPos);
             Canvas.SetTop(handControl.hand, e.yPos);
             Canvas.SetLeft(handControl.hand, e.xPos);
         }

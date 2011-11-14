@@ -56,11 +56,11 @@ namespace KinectControll.Model.Position
         {
             get
             {
-                return _current;
+                return _normed;
             }
             set
             {
-                _current = value;
+                _normed = value;
             }
 
         }

@@ -39,6 +39,9 @@ namespace KinectControll.Model.Threading
          */
         public void AddThread(String id, Thread thread)
         {
+            // Try to remove
+            RemoveThread(id);
+            // Add
             _threads.Add(id, thread);
         }
 
@@ -47,16 +50,19 @@ namespace KinectControll.Model.Threading
          */
         public void RemoveThread(String id)
         {
-            Thread toRemove = _threads[id];
-            // Thread is beeing run right now
-            if (toRemove != null & toRemove.IsAlive)
+            if (_threads.ContainsKey(id))
             {
-                // Stop thread if running
-                toRemove.Abort();
-            }
+                Thread toRemove = _threads[id];
+                // Thread is beeing run right now
+                if (toRemove != null & toRemove.IsAlive)
+                {
+                    // Stop thread if running
+                    toRemove.Abort();
+                }
 
-            // Remove from list
-            _threads.Remove(id);
+                // Remove from list
+                _threads.Remove(id);
+            }
         }
 
         #region Getter and setter methods

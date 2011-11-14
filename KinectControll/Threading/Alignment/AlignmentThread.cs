@@ -131,7 +131,7 @@ namespace KinectControll.Threading.Alignment
                     if (head != null && leftHand != null && rightHand != null)
                     {
                         // Store this state to model
-                        AlignmentModel.Instance.SetCameraVO(i, new CameraVO(i, head, leftHand, rightHand));
+                        AlignmentModel.Instance.RegisterCameraVO(i, new CameraVO(i, head, leftHand, rightHand));
                         Console.WriteLine("Angle " + i + ", h: " + head.Y + ", l: " + leftHand.Y + ", r: " + rightHand.Y);
                     }
                 }
