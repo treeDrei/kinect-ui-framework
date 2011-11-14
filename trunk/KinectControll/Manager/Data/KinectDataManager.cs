@@ -9,6 +9,10 @@ using KinectControll.Manager.Data.Event;
 using KinectControll.Pattern;
 // Microsoft Kinect API
 using Microsoft.Research.Kinect.Nui;
+// Stores normed psoition
+using KinectControll.Model.Position;
+// Required to apply offset
+using KinectControll.Model.Alignment;
 
 namespace KinectControll.Manager.Data
 {
@@ -26,7 +30,7 @@ namespace KinectControll.Manager.Data
         // Stores wether data stream has been opened
         private Boolean _isStarted = false;
 
-        private KinectDataVO _vo;
+        private PositionModel _positionModel;
         #endregion
 
         /**
@@ -37,6 +41,8 @@ namespace KinectControll.Manager.Data
         {
             _runtime = Runtime.Kinects[0];
             _runtime.SkeletonFrameReady += new EventHandler<SkeletonFrameReadyEventArgs>(SkeletonFrameReadyHandler);
+
+            _positionModel = PositionModel.Instance;
         }
 
         /**
@@ -53,9 +59,9 @@ namespace KinectControll.Manager.Data
             if (firstSkeleton != null)
             {
                 // Create object with null reference
-                Position head = null;
-                Position leftHand = null;
-                Position rightHand = null;
+                PositionVector head = null;
+                PositionVector leftHand = null;
+                PositionVector rightHand = null;
 
                 // Check wether user is beeing tracked
                 if (firstSkeleton.TrackingState == SkeletonTrackingState.Tracked)
@@ -65,22 +71,26 @@ namespace KinectControll.Manager.Data
                     leftHand = RetreiveData(firstSkeleton, JointID.HandLeft);   //new Position(firstSkeleton.Joints[JointID.HandLeft].Position.X, firstSkeleton.Joints[JointID.HandLeft].Position.Y, firstSkeleton.Joints[JointID.HandLeft].Position.Z);
                     rightHand = RetreiveData(firstSkeleton, JointID.HandRight); //new Position(firstSkeleton.Joints[JointID.HandRight].Position.X, firstSkeleton.Joints[JointID.HandRight].Position.Y, firstSkeleton.Joints[JointID.HandRight].Position.Z);
 
+                    // Apply offset to data to transform user input into the midle
+                    double offsetX = AlignmentModel.Instance.Offset.X;
+                    head.X += offsetX;
+                    leftHand.X += offsetX;
+                    rightHand.X += offsetX;
+
                     // Positions don't need to be updated if nobody is beeing tracked
                     TriggerUpdate(new DataManagerEventArgs(head, leftHand, rightHand));
                 }
 
-                _vo = new Data.KinectDataVO(head, leftHand, rightHand);
-                
+                _positionModel.Normed = new PositionVO(head, leftHand, rightHand);
              }
         }
 
-        private Position RetreiveData(SkeletonData skeletonData, JointID jointID)
+        /**
+         * Will factor joint data to internal position data
+         */
+        private PositionVector RetreiveData(SkeletonData skeletonData, JointID jointID)
         {
-            //if (skeletonData.Joints[jointID].TrackingState == JointTrackingState.Tracked)
-            //{
-                return new Position(skeletonData.Joints[jointID].Position.X, skeletonData.Joints[jointID].Position.Y, skeletonData.Joints[jointID].Position.Z);
-            //}
-            return null;
+            return new PositionVector(skeletonData.Joints[jointID].Position.X, skeletonData.Joints[jointID].Position.Y, skeletonData.Joints[jointID].Position.Z);
         }
 
         #region Private methods
@@ -222,17 +232,6 @@ namespace KinectControll.Manager.Data
             get
             {
                 return _runtime;
-            }
-        }
-
-        /**
-         * Value object stores last known positions
-         */
-        public KinectDataVO KinectDataVO
-        {
-            get
-            {
-                return _vo;
             }
         }
         #endregion

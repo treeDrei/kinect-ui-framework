@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using KinectControll.Manager.Data;
+// Requzired for Position extension and Vectors
+using KinectControll.Model.Position;
+
+
 
 namespace KinectControll.Model.Alignment
 {
-    public class CameraVO
+    public class CameraVO : PositionVO
     {
         private int _angle;
 
-        public CameraVO(int angle, Position head, Position leftHand, Position rightHand)
+        public CameraVO(int angle, PositionVector head, PositionVector leftHand, PositionVector rightHand) : base(head, leftHand, rightHand)
         {
             _angle = angle;
-            this.Head = head;
-            this.LeftHand = leftHand;
-            this.RightHand = rightHand;
         }
 
         /**
@@ -29,23 +29,5 @@ namespace KinectControll.Model.Alignment
                 return _angle;
             }
         }
-
-        /**
-         * Head position
-         * Get/set
-         */
-        public Position Head { get; set; }
-
-        /**
-         * Left hand position
-         * Get/set
-         */
-        public Position LeftHand { get; set; }
-
-        /**
-         * Right hand position
-         * Get/set
-         */
-        public Position RightHand { get; set; }
     }
 }

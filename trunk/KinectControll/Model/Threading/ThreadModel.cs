@@ -5,6 +5,8 @@ using System.Text;
 
 using System.Threading;
 
+using KinectControll.Pattern;
+
 namespace KinectControll.Model.Threading
 {
     /**
@@ -27,17 +29,8 @@ namespace KinectControll.Model.Threading
         {
             get
             {
-                return SingletonCreator.instance;
+                return SingletonProvider<ThreadModel>.Instance;
             }
-        }
-
-        /**
-         * Nested calss can only be called by ItemManager
-         */
-        private class SingletonCreator
-        {
-            static SingletonCreator() { }
-            internal static readonly ThreadModel instance = new ThreadModel();
         }
         #endregion
 

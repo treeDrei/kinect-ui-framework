@@ -9,6 +9,8 @@ using System.Threading;
 using KinectControll.Manager.Alignment;
 // 
 using KinectControll.Model.Threading;
+//
+using KinectControll.Threading.Alignment;
 
 namespace KinectControll.Controller.Alignment
 {
@@ -19,8 +21,8 @@ namespace KinectControll.Controller.Alignment
          */
         public static void CollectData()
         {
-            CameraPositioning camPos = new CameraPositioning();
-            Thread camPosThread = new Thread(new ThreadStart(camPos.ArrangeCamera));
+            AlignmentThread camPos = new AlignmentThread();
+            Thread camPosThread = new Thread(new ThreadStart(camPos.Run));
 
             ThreadModel.Instance.AddThread("camPos", camPosThread);
             camPosThread.Start();

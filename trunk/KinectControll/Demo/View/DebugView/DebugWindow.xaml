@@ -6,11 +6,12 @@
         <Image Height="240" HorizontalAlignment="Left" Name="videoImage" Stretch="Fill" VerticalAlignment="Top" Width="320" />
         <Image Height="240" HorizontalAlignment="Right" Name="depthImage" Stretch="Fill" VerticalAlignment="Top" Width="320" />
         <Label Content="Es ist was zu sehen!" Height="28" HorizontalAlignment="Left" Margin="326,92,0,0" Name="debugOutput" VerticalAlignment="Top" Width="626" />
-        <Canvas Name="MainCanvas" HorizontalAlignment="Center" Margin="514,0,764,0" Width="0">
+        <Canvas Name="MainCanvas" HorizontalAlignment="Right" Margin="160,120" Width="0">
             <Ellipse Canvas.Left="0" Canvas.Top="0" Height="50" Name="headEllipse" Stroke="Black" Width="50" Fill="Orange" />
             <Ellipse Canvas.Left="50" Canvas.Top="0" Height="50" Name="rightEllipse" Stroke="Black" Width="50" Fill="SlateGray" />
             <Ellipse Canvas.Left="100" Canvas.Top="0" Fill="SpringGreen" Height="50" Name="leftEllipse" Stroke="Black" Width="50" />
-            <Rectangle Height="240" HorizontalAlignment="Left" Margin="0,98,0,0" Name="rectangle1" Fill="AliceBlue" Stroke="Black" VerticalAlignment="Top" Width="11" Canvas.Top="-98" />
+            <Rectangle Height="240" Name="rectangle1" Fill="AliceBlue" Stroke="Black" Width="3" Canvas.Top="-120"/>
+            <Rectangle Height="3" Name="rectangle2" Fill="AliceBlue" Stroke="Black" Width="320" Canvas.Left="-160"/>
             <Ellipse Fill="Black" Height="50" Name="controllElipse" Stroke="Black" Width="50"/>
         </Canvas>
         

@@ -64,6 +64,13 @@ namespace KinectControll.Manager.Item
             hit = value;
         }
 
+        /*
+        public virtual Boolean CheckHit()
+        {
+
+        }
+        */
+
         /**
          * Height getter
          */
@@ -132,5 +139,6 @@ namespace KinectControll.Manager.Item
             enabled = value;
             TriggerEnabledChange(EventArgs.Empty);
         }
+
     }
 }

@@ -107,6 +107,7 @@ namespace KinectControll.Demo.View.HandView
             // Type cast to conrete type
             HandControl handControl = (HandControl)userControl;
 
+            Console.WriteLine("Set hand y to " +e.yPos);
             Canvas.SetTop(handControl.hand, e.yPos);
             Canvas.SetLeft(handControl.hand, e.xPos);
         }

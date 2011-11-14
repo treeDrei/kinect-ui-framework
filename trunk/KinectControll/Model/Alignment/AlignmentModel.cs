@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using System.Windows;
+
 using System.Threading;
 
 namespace KinectControll.Model.Alignment
@@ -15,6 +17,8 @@ namespace KinectControll.Model.Alignment
     {
         #region Private variables
         private Dictionary<int, CameraVO> _cameraVOs;
+        // This offste can be applied to all positions
+        private Point _offset;
         #endregion
 
         /**
@@ -47,9 +51,17 @@ namespace KinectControll.Model.Alignment
         /**
          * Stores a thread
          */
-        public void AddCameraVO(int angle, CameraVO vo)
+        public void SetCameraVO(int angle, CameraVO vo)
         {
             _cameraVOs.Add(angle, vo);
+        }
+
+        /**
+         * Returns a camera vo
+         */
+        public CameraVO GetCameraVO(int angle)
+        {
+            return _cameraVOs[angle];
         }
 
         /**
@@ -69,6 +81,27 @@ namespace KinectControll.Model.Alignment
                 return _cameraVOs;
             }
         }
+
+        /**
+         * X,Y Offset for head and hands
+         */
+        public Point Offset
+        {
+            get
+            {
+                return _offset;
+            }
+            set
+            {
+                _offset = value;
+            }
+
+        }
+
+        /**
+         * Stores best camera angle
+         */
+        public int BestAngle { get; set; }
         #endregion
     }
 }

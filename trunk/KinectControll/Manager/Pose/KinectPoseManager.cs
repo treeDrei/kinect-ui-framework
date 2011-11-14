@@ -96,45 +96,15 @@ namespace KinectControll.Manager.Pose
             return !poseList.Contains(pose);
             */
         }
-
-        /*
-        public void SetPoseJoints(Joint head, Joint leftHand, Joint rightHand)
-        {
-                
-            // Steigungen 
-            float mHeadLeft = MathUtil.CalculateGradient(head.Position.X, head.Position.Y, leftHand.Position.X, leftHand.Position.Y);
-            float mRightLeft = MathUtil.CalculateGradient(rightHand.Position.X, rightHand.Position.Y, leftHand.Position.X, leftHand.Position.Y);
-            float mHeadRight = MathUtil.CalculateGradient(head.Position.X, head.Position.Y, rightHand.Position.X, rightHand.Position.Y);
-
-            double angleLeft = MathUtil.CalculateAngle(mHeadLeft, mRightLeft);
-            double angleRight = MathUtil.CalculateAngle(mHeadRight, mRightLeft);
-            double angleHead = 180 - (angleLeft + angleRight);
-
-            // Check all poses 
-            poseList.ForEach
-            (
-                delegate(KinectPoseItem item)
-                {
-                    // Pose retreived for easy angle checking
-                    IPose pose = item.Pose;
-                    // Enables all Kinect items on this view
-                    item.Select(((angleRight > pose.RightHandAngle() - pose.AngleOffset()) && (angleRight < pose.RightHandAngle() + pose.AngleOffset()) && (angleLeft < pose.LeftHandAngle() + pose.AngleOffset()) && (angleLeft > pose.LeftHandAngle() - pose.AngleOffset())));
-                }
-            );
-
-            // Pose creation is easy with this data
-            //Console.WriteLine("aLeft " + angleLeft + ", aHead " + angleHead + ", aRight" + angleRight);
-        }
-         */
-
+               
         /**
          * 
          */
-        public void CalculateAngles(float headX, float headY, float leftX, float leftY, float rightX, float rightY)
+        public void CalculateAngles(double headX, double headY, double leftX, double leftY, double rightX, double rightY)
         {
-            float mHeadLeft = MathUtil.CalculateGradient(headX, headY, leftX, leftY);
-            float mRightLeft = MathUtil.CalculateGradient(rightX, rightY, leftX, leftY);
-            float mHeadRight = MathUtil.CalculateGradient(headX, headY, rightX, rightY);
+            double mHeadLeft = MathUtil.CalculateGradient(headX, headY, leftX, leftY);
+            double mRightLeft = MathUtil.CalculateGradient(rightX, rightY, leftX, leftY);
+            double mHeadRight = MathUtil.CalculateGradient(headX, headY, rightX, rightY);
 
             double angleLeft = MathUtil.CalculateAngle(mHeadLeft, mRightLeft);
             double angleRight = MathUtil.CalculateAngle(mHeadRight, mRightLeft);

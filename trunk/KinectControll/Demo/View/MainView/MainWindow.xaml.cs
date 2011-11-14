@@ -29,6 +29,8 @@ namespace KinectControll.Demo.View.MainView
         public MainWindow()
         {
             InitializeComponent();
+
+            this.Cursor = Cursors.None;
         }
 
         /**

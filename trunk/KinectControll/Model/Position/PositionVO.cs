@@ -3,17 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-// Required to use a vector
-using System.Windows;
-
-// Required for positions
-using KinectControll.Model.Position;
-
-namespace KinectControll.Manager.Data.Event
+namespace KinectControll.Model.Position
 {
-    public class DataManagerEventArgs : EventArgs
+    public class PositionVO
     {
-        public DataManagerEventArgs(PositionVector head = null, PositionVector leftHand = null, PositionVector rightHand = null)
+        public PositionVO(PositionVector head = null, PositionVector leftHand = null, PositionVector rightHand = null)
         {
             this.Head = head;
             this.LeftHand = leftHand;
