@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("assets/img/calibration.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/video.png")]
 
 

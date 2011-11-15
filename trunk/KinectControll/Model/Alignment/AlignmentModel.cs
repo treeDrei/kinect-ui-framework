@@ -62,7 +62,14 @@ namespace KinectControll.Model.Alignment
          */
         public CameraVO GetCameraVO(int angle)
         {
-            return _cameraVOs[angle];
+            // Check wether reference to requested angle exists
+            if(_cameraVOs.ContainsKey(angle))
+            {
+                return _cameraVOs[angle];
+            }
+
+            // Requested element does not exist
+            return null;
         }
 
         /**
