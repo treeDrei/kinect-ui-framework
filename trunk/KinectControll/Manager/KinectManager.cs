@@ -20,13 +20,13 @@ namespace KinectControll.Manager
     public class KinectManager
     {
         // Control Manager handles hand position and decides wich one to use
-        private KinectInputManager inputManager;
+        private HandInputManager UserInputManager;
         // Collision Manager handles control collision with items
         private CollisionManager collisionManager;
         // Pose manager analysisi angles between head and both hands to check for poses
-        private KinectPoseManager poseManager;
+        private PoseManager poseManager;
         // Data manager 
-        private KinectDataManager kinectDataManager;
+        private SDKDataManager kinectDataManager;
 
         /**
          * Constructor can only be called by nested class because it's not public
@@ -34,15 +34,15 @@ namespace KinectControll.Manager
         public KinectManager()
         {
 
-            kinectDataManager = KinectDataManager.Instance;
+            kinectDataManager = SDKDataManager.Instance;
             // Start data output
             kinectDataManager.Start();
             // Creates input manager
-            inputManager = KinectInputManager.Instance;
-            inputManager.Start();
+            UserInputManager = HandInputManager.Instance;
+            UserInputManager.Start();
             // Creates pose manager
             
-            poseManager = KinectPoseManager.Instance;
+            poseManager = PoseManager.Instance;
             //poseManager.CalculateAngles(0, 20, -10, 0, 10, 0);
             /*
             KinectPoseItem idleItem = poseManager.RegisterPose(new Idle());
@@ -74,7 +74,7 @@ namespace KinectControll.Manager
          */
         void IdleEndHandler(object sender, EventArgs e)
         {
-            inputManager.Start();
+            UserInputManager.Start();
         }
 
         /**
@@ -82,7 +82,7 @@ namespace KinectControll.Manager
          */
         private void IdleBeginHandler(object sender, EventArgs e)
         {
-            inputManager.Stop();
+            UserInputManager.Stop();
         }
 
         /**

@@ -37,9 +37,9 @@ namespace KinectControll.Demo.View.DebugView
         */
         private void windowLoadedHandler(object sender, RoutedEventArgs e)
         {
-            nui = KinectDataManager.Instance.Runtime;
-            KinectInputManager control = KinectInputManager.Instance;
-            control.OnChanged += new EventHandler<KinectInputManagerEventArgs>(controlChangedHandler);
+            nui = SDKDataManager.Instance.Runtime;
+            HandInputManager control = HandInputManager.Instance;
+            control.OnChanged += new EventHandler<HandInputManagerEventArgs>(controlChangedHandler);
 
             debugOutput.Content = "Loaded hat geklappt...";
 
@@ -58,7 +58,7 @@ namespace KinectControll.Demo.View.DebugView
         /**
          * Updates hand position on view
          */
-        void controlChangedHandler(object sender, KinectInputManagerEventArgs e)
+        void controlChangedHandler(object sender, HandInputManagerEventArgs e)
         {
             Canvas.SetLeft(controllElipse, e.xPos);
             Canvas.SetTop(controllElipse, e.yPos);

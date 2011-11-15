@@ -17,7 +17,7 @@ using KinectControll.Model.Alignment;
 
 namespace KinectControll.Manager.Input
 {
-    public class KinectInputManager
+    public class HandInputManager
     {
         private Boolean isStarted = false;
          
@@ -35,13 +35,13 @@ namespace KinectControll.Manager.Input
             /**
              * Instance will call private Singletor constructor
              */
-            internal static readonly KinectInputManager instance = new KinectInputManager();
+            internal static readonly HandInputManager instance = new HandInputManager();
         }
         #endregion
         /**
          * Singleton can't be instantiated from outside
          */
-        private KinectInputManager() 
+        private HandInputManager() 
         {
             // Initial value outside visible area
             TriggerChanged(-100, -100);
@@ -112,7 +112,7 @@ namespace KinectControll.Manager.Input
         /**
          * Generates instance 
          */
-        public static KinectInputManager Instance
+        public static HandInputManager Instance
         {
             get
             {
@@ -127,7 +127,7 @@ namespace KinectControll.Manager.Input
             {
                 isStarted = true;
 
-                KinectDataManager dataManager = KinectDataManager.Instance;
+                SDKDataManager dataManager = SDKDataManager.Instance;
                 dataManager.OnUpdate += new EventHandler<DataManagerEventArgs>(UpdateHandler);
                 dataManager.OnFixedUpdate += new EventHandler<DataManagerEventArgs>(FixedUpdateHandler);
             }
@@ -139,7 +139,7 @@ namespace KinectControll.Manager.Input
             {
                 isStarted = false;
 
-                KinectDataManager dataManager = KinectDataManager.Instance;
+                SDKDataManager dataManager = SDKDataManager.Instance;
                 dataManager.OnUpdate -= new EventHandler<DataManagerEventArgs>(UpdateHandler);
                 dataManager.OnFixedUpdate -= new EventHandler<DataManagerEventArgs>(FixedUpdateHandler);
             }
@@ -195,7 +195,7 @@ namespace KinectControll.Manager.Input
 
         #region Event
         // The Event will allow external objects to rigister on it
-        public event EventHandler<KinectInputManagerEventArgs> OnChanged;    
+        public event EventHandler<HandInputManagerEventArgs> OnChanged;    
 
         /**
          * Event dispatch trigger
@@ -204,10 +204,10 @@ namespace KinectControll.Manager.Input
         {
             point = new Point(x, y);
             // This copy will make it more thread-safe
-            EventHandler<KinectInputManagerEventArgs> handler = OnChanged;   
+            EventHandler<HandInputManagerEventArgs> handler = OnChanged;   
             if (handler != null)
             {
-                var args = new KinectInputManagerEventArgs() { xPos = x, yPos = y };  // vary
+                var args = new HandInputManagerEventArgs() { xPos = x, yPos = y };  // vary
                 handler(this, args);
             }
         }
@@ -270,7 +270,4 @@ namespace KinectControll.Manager.Input
             }
         }
     }
-
-    
-
 }

@@ -22,7 +22,7 @@ namespace KinectControll.Demo.Controller.Startup
             BackgroundControl view = new BackgroundControl();
             BackgroundMediator mediator = new BackgroundMediator(view);
 
-            mediator.SetBackground("C:/Users/Peer/Dropbox/KinectControll/KinectControll/assets/img/grey.jpg");
+            mediator.SetBackground("/Images/grey.jpg");
 
             // Reguister mediator to allow later retreival
             Facade.RegisterMediator(mediator);

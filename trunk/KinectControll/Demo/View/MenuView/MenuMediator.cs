@@ -32,16 +32,16 @@ namespace KinectControll.Demo.View.MenuView
         {
             base.OnRegister();
             // Navigate to required view
-            view.OnVideoNavigation += new EventHandler(VideoNavigationHandler);
+            view.OnVisualizerNavigation += new EventHandler(VisualizerNavigationHandler);
             view.OnImageNavigation += new EventHandler(ImageNavigationHandler);
         }
 
         /**
          * Handles view navigation request
          */
-        void VideoNavigationHandler(object sender, EventArgs e)
+        void VisualizerNavigationHandler(object sender, EventArgs e)
         {
-            SendNotification(DemoApplicationFacade.NAVIGATE_VIDEO);
+            SendNotification(DemoApplicationFacade.NAVIGATE_VISUALIZER);
         }
 
         void ImageNavigationHandler(object sender, EventArgs e)

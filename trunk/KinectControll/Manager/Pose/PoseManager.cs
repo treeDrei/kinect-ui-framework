@@ -17,15 +17,15 @@ using KinectControll.Model.Pose;
 
 namespace KinectControll.Manager.Pose
 {
-    class KinectPoseManager
+    class PoseManager
     {
         #region Singleton instantiation
         /**
          * Singleton can't be instantiated from outside
          */
-        private KinectPoseManager() 
+        private PoseManager() 
         {
-            KinectDataManager.Instance.OnFixedUpdate += new EventHandler<DataManagerEventArgs>(FixedUpdateHandler);
+            SDKDataManager.Instance.OnFixedUpdate += new EventHandler<DataManagerEventArgs>(FixedUpdateHandler);
         }
 
         /**
@@ -36,7 +36,7 @@ namespace KinectControll.Manager.Pose
             CalculateAngles(e.Head.X, e.Head.Y, e.LeftHand.X, e.LeftHand.Y, e.RightHand.X, e.RightHand.Y);
         }
 
-        public static KinectPoseManager Instance
+        public static PoseManager Instance
         {
             get
             {
@@ -50,7 +50,7 @@ namespace KinectControll.Manager.Pose
         private class SingletonCreator
         {
             static SingletonCreator() { }
-            internal static readonly KinectPoseManager instance = new KinectPoseManager();
+            internal static readonly PoseManager instance = new PoseManager();
         }
         #endregion
                
@@ -87,7 +87,7 @@ namespace KinectControll.Manager.Pose
 
         #region Event
         // The Event will allow external objects to rigister on it
-        public event EventHandler<KinectPoseManagerEventArgs> OnPose;
+        public event EventHandler<PoseManagerEventArgs> OnPose;
 
         /**
          * Event dispatch trigger
@@ -95,10 +95,10 @@ namespace KinectControll.Manager.Pose
         private void TriggerPose( String type )
         {
             // This copy will make it more thread-safe
-            EventHandler<KinectPoseManagerEventArgs> handler = OnPose;
+            EventHandler<PoseManagerEventArgs> handler = OnPose;
             if (handler != null)
             {
-                var args = new KinectPoseManagerEventArgs() { type = type };  // vary
+                var args = new PoseManagerEventArgs() { type = type };  // vary
                 handler(this, args);
             }
         }

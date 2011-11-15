@@ -50,6 +50,7 @@ namespace KinectControll.Demo.Controller.Startup
             SendNotification(DemoApplicationFacade.INITIALIZE_HOME_VIEW);
             SendNotification(DemoApplicationFacade.INITIALIZE_POSE_VIEW);
             SendNotification(DemoApplicationFacade.INITIALIZE_CALIBRATION_VIEW);
+            SendNotification(DemoApplicationFacade.INITIALIZE_VISUALIZER_VIEW);
             SendNotification(DemoApplicationFacade.INITIALIZE_HAND_VIEW);
         }
     }

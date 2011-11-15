@@ -18,7 +18,7 @@ namespace KinectControll.Demo.Controller.Startup
             // Creates instance of kinect manager to start kinect
             KinectManager manager = KinectManager.Instance;
 
-            KinectInputManager control = KinectInputManager.Instance;
+            HandInputManager control = HandInputManager.Instance;
             // Sets area for kinect controll
             control.Width = 525;
             control.Height = 525;

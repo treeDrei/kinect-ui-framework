@@ -35,19 +35,19 @@ namespace KinectControll.Demo.View.ImageView
 {
     public class ImageView : BaseKinectView
     {
-        private KinectInputManager selection;
+        private HandInputManager selection;
         private KinectItemManager itemManager;
 
         public ImageView()
             : base("ImageView", new ImageControl())
         {
             // Retreive selection Manager from kinect manager
-            selection = KinectInputManager.Instance;
+            selection = HandInputManager.Instance;
 
             KinectItem item = new KinectItem("image1", 0, 0, 525, 525);
 
-            SpeedCheck speedCheck = new SpeedCheck(220, 300);
-            DistanceCheck distanceCheck = new DistanceCheck(-100, 0);
+            SpeedCheck speedCheck = new SpeedCheck(100, 500);
+            DistanceCheck distanceCheck = new DistanceCheck(100, 0);
             MoveCheck moveCheck = new MoveCheck(speedCheck, distanceCheck);
 
             KinectSwypeable swypeable = new KinectSwypeable(item, moveCheck);

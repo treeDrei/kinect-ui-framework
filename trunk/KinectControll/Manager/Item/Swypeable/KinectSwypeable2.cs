@@ -15,7 +15,7 @@ namespace KinectControll.Manager.Item.Swypable
      */
     class KinectSwypeable2 : ItemDecorator
     {
-        KinectInputManager input;
+        HandInputManager input;
 
         // Stores count data to match threshold
         private int hitCount = 0;
@@ -33,7 +33,7 @@ namespace KinectControll.Manager.Item.Swypable
             : base(item)
         {
             distanceCheck = new DistanceCheck(sideDist, upDist);
-            input = KinectInputManager.Instance;
+            input = HandInputManager.Instance;
 
             hitThreshold = threshold;
         }

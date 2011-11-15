@@ -37,7 +37,6 @@ namespace KinectControll.Check.Distance
                 horizontal = (horDist < horizontalDistance);
             }
 
-            Console.WriteLine("vert = " + vertDist + ", " + verticalDistance + ", " + vertical + " /  hor = " + horDist + ", " + horizontalDistance + ", " + horizontal);
             // Return true if in radius r around P(x,y)
             // Dont check up/down if the distance is 0
             return (vertical && horizontal);

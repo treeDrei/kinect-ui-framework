@@ -5,7 +5,7 @@ using System.Text;
 
 namespace KinectControll.Manager.Pose.Event
 {
-    class KinectPoseManagerEventArgs :  EventArgs
+    class PoseManagerEventArgs :  EventArgs
     {
         public String type { get; set; }
     }

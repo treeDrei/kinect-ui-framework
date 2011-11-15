@@ -127,9 +127,10 @@
     <Compile Include="Demo\Controller\Background\SetBackgroundControlCommand.cs" />
     <Compile Include="Demo\Controller\Calibration\CalibrationCommand.cs" />
     <Compile Include="Demo\Controller\Image\ShowImageViewControlCommand.cs" />
-    <Compile Include="Demo\Controller\Navigation\NavigateVideoCommand.cs" />
+    <Compile Include="Demo\Controller\Navigation\NavigateVisualizerCommand.cs" />
     <Compile Include="Demo\Controller\Navigation\NavigateImageCommand.cs" />
     <Compile Include="Demo\Controller\Navigation\NavigateHomeCommand.cs" />
+    <Compile Include="Demo\Controller\Startup\InitializeVisualizerControlCommand.cs" />
     <Compile Include="Demo\Controller\Startup\InitializeCalibrationViewCommand.cs" />
     <Compile Include="Demo\Controller\Startup\InitializePoseViewCommand.cs" />
     <Compile Include="Demo\Controller\Startup\InitializeKinectManagerCommand.cs" />
@@ -142,6 +143,7 @@
     <Compile Include="Demo\Controller\Startup\InitializeHomeCommand.cs" />
     <Compile Include="Demo\Controller\Startup\StartupCommand.cs" />
     <Compile Include="Demo\DemoApplicationFacade.cs" />
+    <Compile Include="Demo\Factory\ButtonFactory.cs" />
     <Compile Include="Demo\Pose\HomePose\HomePoseMediator.cs" />
     <Compile Include="Demo\Pose\PoseMediator.cs" />
     <Compile Include="Demo\View\BackgroundView\BackgroundControl.xaml.cs">
@@ -189,7 +191,13 @@
     <Compile Include="Demo\View\MainView\MainMediator.cs" />
     <Compile Include="Check\Distance\DistanceCheck.cs" />
     <Compile Include="Check\TargetCheck.cs" />
+    <Compile Include="Demo\View\VisualizerView\VisualizerControl.xaml.cs">
+      <DependentUpon>VisualizerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Demo\View\VisualizerView\VisualizerMediator.cs" />
+    <Compile Include="Demo\View\VisualizerView\VisualizerView.cs" />
     <Compile Include="Manager\Alignment\AlignmentAnalysis.cs" />
+    <Compile Include="Manager\Item\Selectable\KinectHoldable.cs" />
     <Compile Include="Model\Pose\HomePose.cs" />
     <Compile Include="Model\Alignment\CameraVO.cs" />
     <Compile Include="Model\Pose\PoseModel.cs" />
@@ -198,7 +206,7 @@
     <Compile Include="Manager\Data\ADataManager.cs" />
     <Compile Include="Manager\Data\Event\DataManagerEventArgs.cs" />
     <Compile Include="Manager\Data\IDataManager.cs" />
-    <Compile Include="Manager\Data\KinectDataManager.cs" />
+    <Compile Include="Manager\Data\SDKDataManager.cs" />
     <Compile Include="Model\Position\PositionVO.cs" />
     <Compile Include="Model\Position\PositionVector.cs" />
     <Compile Include="Manager\Item\Dragable.cs" />
@@ -207,12 +215,12 @@
     <Compile Include="Manager\Item\Swypeable\KinectSwypeable2.cs" />
     <Compile Include="Manager\Item\Swypeable\KinectSwypeable.cs" />
     <Compile Include="Model\Pose\PoseItem.cs" />
-    <Compile Include="Manager\Pose\Event\KinectPoseManagerEventArgs.cs" />
+    <Compile Include="Manager\Pose\Event\PoseManagerEventArgs.cs" />
     <Compile Include="Model\Pose\IdlePose.cs" />
     <Compile Include="Model\Pose\IPose.cs" />
-    <Compile Include="Manager\Pose\KinectPoseManager.cs" />
-    <Compile Include="Manager\Input\KinectInputManager.cs" />
-    <Compile Include="Manager\Input\Event\KinectInputManagerEventArgs.cs" />
+    <Compile Include="Manager\Pose\PoseManager.cs" />
+    <Compile Include="Manager\Input\HandInputManager.cs" />
+    <Compile Include="Manager\Input\Event\HandInputManagerEventArgs.cs" />
     <Compile Include="Manager\Item\ItemDecorator.cs" />
     <Compile Include="Manager\Item\KinectItem.cs" />
     <Compile Include="Manager\Item\Selectable\KinectSelectable.cs" />
@@ -226,6 +234,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Demo\View\ImageView\ImageControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Demo\View\VisualizerView\VisualizerControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -337,6 +349,30 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\360_0.png" />
+    <Resource Include="Images\360_1.png" />
+    <Resource Include="Images\360_10.png" />
+    <Resource Include="Images\360_11.png" />
+    <Resource Include="Images\360_12.png" />
+    <Resource Include="Images\360_13.png" />
+    <Resource Include="Images\360_14.png" />
+    <Resource Include="Images\360_15.png" />
+    <Resource Include="Images\360_2.png" />
+    <Resource Include="Images\360_3.png" />
+    <Resource Include="Images\360_4.png" />
+    <Resource Include="Images\360_5.png" />
+    <Resource Include="Images\360_6.png" />
+    <Resource Include="Images\360_7.png" />
+    <Resource Include="Images\360_8.png" />
+    <Resource Include="Images\360_9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\leftButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\rightButton.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

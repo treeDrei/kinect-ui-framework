@@ -9,6 +9,7 @@ using PureMVC.Interfaces;
 using KinectControll.Demo.View.MenuView;
 using KinectControll.Demo.View.ImageView;
 using KinectControll.Demo.View.HomeView;
+using KinectControll.Demo.View.VisualizerView;
 
 using KinectControll.Demo.View.BackgroundView;
 
@@ -27,6 +28,10 @@ namespace KinectControll.Demo.Controller.Navigation
             // Change image view state
             ImageMediator imageMediator = (ImageMediator)Facade.RetrieveMediator(ImageMediator.NAME);
             imageMediator.Hide();
+
+            // Change visualizer view state
+            VisualizerMediator visualizerMadiator = (VisualizerMediator)Facade.RetrieveMediator(VisualizerMediator.NAME);
+            visualizerMadiator.Hide();
 
             // Change home view state
             HomeMediator homeMediator = (HomeMediator)Facade.RetrieveMediator(HomeMediator.NAME);

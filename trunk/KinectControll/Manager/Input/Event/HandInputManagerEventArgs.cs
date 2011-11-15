@@ -5,7 +5,7 @@ using System.Text;
 
 namespace KinectControll.Manager.Input.Event
 {
-    public class KinectInputManagerEventArgs : EventArgs
+    public class HandInputManagerEventArgs : EventArgs
     {
         public double xPos { get; set; }
         public double yPos { get; set; }

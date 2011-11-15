@@ -11,7 +11,7 @@ namespace KinectControll.Manager
 {
     public class CollisionManager
     {
-        KinectInputManager input;
+        HandInputManager input;
         KinectItemManager items;
 
         #region Singleton instantiation
@@ -20,9 +20,9 @@ namespace KinectControll.Manager
          */
         private CollisionManager() 
         {
-            input = KinectInputManager.Instance;
+            input = HandInputManager.Instance;
             items = KinectItemManager.Instance;
-            input.OnChanged += new EventHandler<KinectInputManagerEventArgs>(controlChangedHandler);
+            input.OnChanged += new EventHandler<HandInputManagerEventArgs>(controlChangedHandler);
         }
 
         public static CollisionManager Instance
@@ -46,7 +46,7 @@ namespace KinectControll.Manager
         /**
          * Handles controll update
          */
-        void controlChangedHandler(object sender, KinectInputManagerEventArgs e)
+        void controlChangedHandler(object sender, HandInputManagerEventArgs e)
         {
             // Run throuhg enabled items. No point in checking the rest.
             items.Enabled.ForEach(delegate(KinectItem item)
