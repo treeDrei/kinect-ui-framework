@@ -16,7 +16,7 @@ using KinectControll.Model.Alignment;
 
 namespace KinectControll.Manager.Data
 {
-    public class KinectDataManager : ADataManager, IDataManager
+    public class SDKDataManager : ADataManager, IDataManager
     {
 
         #region Private variables
@@ -37,7 +37,7 @@ namespace KinectControll.Manager.Data
          * Initializes Data manager in constructor
          * This is called only once since it should be used as singleton
          */
-        public KinectDataManager()
+        public SDKDataManager()
         {
             _runtime = Runtime.Kinects[0];
             _runtime.SkeletonFrameReady += new EventHandler<SkeletonFrameReadyEventArgs>(SkeletonFrameReadyHandler);
@@ -119,12 +119,12 @@ namespace KinectControll.Manager.Data
         /**
          * Generates instance 
          */
-        public static KinectDataManager Instance
+        public static SDKDataManager Instance
         {
             get
             {
                 // Use the Singleton Provider to create an instance of this class or reference created class if already instatiated
-                return SingletonProvider<KinectDataManager>.Instance;
+                return SingletonProvider<SDKDataManager>.Instance;
             }
         }
 

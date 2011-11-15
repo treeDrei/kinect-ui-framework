@@ -16,7 +16,7 @@ namespace KinectControll.Manager.Item.Swypable
      */
     class KinectSwypeable : ItemDecorator
     {
-        private KinectInputManager inputManager;
+        private HandInputManager UserInputManager;
     
         private MoveCheck moveCheck;
 
@@ -29,7 +29,7 @@ namespace KinectControll.Manager.Item.Swypable
             // Speed and distance will make up a gesture
             this.moveCheck = moveCheck;
             
-            inputManager = KinectInputManager.Instance;
+            UserInputManager = HandInputManager.Instance;
         }
 
         
@@ -57,7 +57,7 @@ namespace KinectControll.Manager.Item.Swypable
         override public void SetHit(Boolean value)
         {
             //Check wether speed paraneters have been met
-            if (moveCheck.SetCurrent(inputManager.Current))
+            if (moveCheck.SetCurrent(UserInputManager.Current))
             {
                 // If parameters have been met
                 TriggerSwypeComplete(EventArgs.Empty);

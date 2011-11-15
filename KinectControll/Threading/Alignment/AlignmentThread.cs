@@ -19,6 +19,8 @@ using KinectControll.Controller.Alignment;
 //
 using KinectControll.Model.Position;
 
+using KinectControll.Manager.Input;
+
 namespace KinectControll.Threading.Alignment
 {
     /**
@@ -32,9 +34,6 @@ namespace KinectControll.Threading.Alignment
     {
         // Displays thread state
         private Boolean _isRunning;
-        // Camera for angle manipulation
-        private Camera _camera;
-
         // Best camera angle found (default: streight ahead) 
         private int _bestAngle = 0;
 
@@ -53,20 +52,33 @@ namespace KinectControll.Threading.Alignment
         {
             _isRunning = true;
 
+            // Makes sure hand input will not cause selection
+            HandInputManager.Instance.Stop();
+
+            while(!CameraController.SetAngle(27))
+
             _model = PositionModel.Instance;
 
             CollectBetterData();
             EvaluateBetterAngle();
 
-            EvaluateUserPosition();           
-            
+            EvaluateUserPosition();
+
+            // Thread is complete. Start input
+            HandInputManager.Instance.Start();
+
             _isRunning = false;
         }
 
+        /**
+         * Stop this thread
+         */
         public void Stop()
         {
             if (_isRunning)
             {
+                // Input is required again
+                HandInputManager.Instance.Start();
                 Thread.CurrentThread.Abort();
             }
         }

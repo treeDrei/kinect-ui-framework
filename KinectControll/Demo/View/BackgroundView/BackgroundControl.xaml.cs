@@ -89,8 +89,12 @@ namespace KinectControll.Demo.View.BackgroundView
 
         public void SetImage(String path)
         {
-            Uri imageUri = new Uri(path);
-            backgroundImage.Source = new BitmapImage(imageUri);
+            BitmapImage bitmapImage = new BitmapImage();
+            bitmapImage.BeginInit();
+            bitmapImage.UriSource = new Uri(path, UriKind.Relative);
+            bitmapImage.EndInit();
+
+            backgroundImage.Source = bitmapImage;
         }
     }
 }

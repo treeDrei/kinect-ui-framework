@@ -19,11 +19,11 @@ namespace KinectControll.Controller.Alignment
         public static Boolean SetAngle(int angle)
         {
             // Check wether camara is avalable
-            if (KinectDataManager.Instance.Runtime.NuiCamera != null)
+            if (SDKDataManager.Instance.Runtime.NuiCamera != null)
             {
                 try
                 {
-                    KinectDataManager.Instance.Runtime.NuiCamera.ElevationAngle = angle;
+                    SDKDataManager.Instance.Runtime.NuiCamera.ElevationAngle = angle;
                     return true;
                 }
                 catch (Exception e)

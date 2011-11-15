@@ -31,6 +31,7 @@ namespace KinectControll.Demo
         public const String INITIALIZE_BACKGROUND_CONTROL       = "initializeBackgourndControl";
         public const String INITIALIZE_POSE_VIEW                = "initializePoseView";
         public const String INITIALIZE_CALIBRATION_VIEW         = "initializeCalibrationView";
+        public const String INITIALIZE_VISUALIZER_VIEW          = "initializeVisualizerView";
 
         public const String APPLICATION_CLOSE                   = "applicationClose";
 
@@ -38,7 +39,7 @@ namespace KinectControll.Demo
 
         public const String NAVIGATE_HOME                       = "navigateHome";
         public const String NAVIGATE_IMAGE                      = "navigateImage";
-        public const String NAVIGATE_VIDEO                      = "navigateVideo";
+        public const String NAVIGATE_VISUALIZER                 = "navigateVisualizer";
 
         public const String SET_BACKGROUND                      = "setBackground";
 
@@ -116,6 +117,7 @@ namespace KinectControll.Demo
             RegisterCommand(INITIALIZE_HOME_VIEW, typeof(InitializeHomeCommand));
             RegisterCommand(INITIALIZE_POSE_VIEW, typeof(InitializePoseViewCommand));
             RegisterCommand(INITIALIZE_CALIBRATION_VIEW, typeof(InitializeCalibrationCommand));
+            RegisterCommand(INITIALIZE_VISUALIZER_VIEW, typeof(InitializeVisualizerControlCommand));
 
             // Background manipulation
             RegisterCommand(SET_BACKGROUND, typeof(SetBackgroundControlCommand));
@@ -129,7 +131,7 @@ namespace KinectControll.Demo
             // Navigation
             RegisterCommand(NAVIGATE_HOME, typeof(NavigateHomeCommand));
             RegisterCommand(NAVIGATE_IMAGE, typeof(NavigateImageCommand));
-            RegisterCommand(NAVIGATE_IMAGE, typeof(NavigateVideoCommand));
+            RegisterCommand(NAVIGATE_VISUALIZER, typeof(NavigateVisualizerCommand));
         }
 
         #endregion

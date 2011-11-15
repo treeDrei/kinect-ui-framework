@@ -31,7 +31,7 @@ namespace KinectControll.Demo.View.MenuView
         private Dictionary<String, UIElement> buttons;
         
         // Event allowing to register on it
-        public event EventHandler OnVideoNavigation;
+        public event EventHandler OnVisualizerNavigation;
         public event EventHandler OnImageNavigation;
         
         public MenuView()
@@ -45,7 +45,7 @@ namespace KinectControll.Demo.View.MenuView
             //phoneButton = new ImageButton("phoneButton");
             CreateButton("imageButton", menuControl.imageButton);
             //questionButton = new ImageButton("questionButton");
-            CreateButton("videoButton", menuControl.videoButton);   
+            CreateButton("visualizerButton", menuControl.visualizerButton);   
         }
 
         #region Component Initialization
@@ -80,9 +80,9 @@ namespace KinectControll.Demo.View.MenuView
         * Event dispatch trigger
         * Fill with EventArgs.Empty if nothing is beeing attached
         */
-        protected virtual void TriggerVideoNavigation(MenuEventArgs e)    // the Trigger
+        protected virtual void TriggerVisualizerNavigation(MenuEventArgs e)    // the Trigger
         {
-            EventHandler handler = OnVideoNavigation;   // make a copy to be more thread-safe
+            EventHandler handler = OnVisualizerNavigation;   // make a copy to be more thread-safe
             if (handler != null)
             {
                 handler(this, e);
@@ -117,9 +117,9 @@ namespace KinectControll.Demo.View.MenuView
                 TriggerImageNavigation(args);
             }
             // Trigger vidieo navigation
-            else if (selectable.GetID() == "videoButton")
+            else if (selectable.GetID() == "visualizerButton")
             {
-                TriggerVideoNavigation(args);
+                TriggerVisualizerNavigation(args);
             }
         }
 

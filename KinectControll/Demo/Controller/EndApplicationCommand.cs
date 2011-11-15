@@ -32,7 +32,7 @@ namespace KinectControll.Demo.Controller
             // Stop manager
             manager.Runtime.Uninitialize();
              * */
-            KinectDataManager.Instance.Stop();
+            SDKDataManager.Instance.Stop();
 
             // Ends all running threads
             ThreadController.EndAll();

@@ -29,8 +29,8 @@ namespace KinectControll.Demo.View.HandView
         public HandView()
             : base("HandView", new HandControl())
         {
-            KinectInputManager inputManager = KinectInputManager.Instance;
-            inputManager.OnChanged += new EventHandler<KinectInputManagerEventArgs>(ControlChangedHandler);
+            HandInputManager userInputManager = HandInputManager.Instance;
+            userInputManager.OnChanged += new EventHandler<HandInputManagerEventArgs>(ControlChangedHandler);
 
             PoseItem idleItem = PoseModel.Instance.RegisterPose(new IdlePose());
             idleItem.OnPoseBegin += new EventHandler(IdleBeginHandler);
@@ -103,7 +103,7 @@ namespace KinectControll.Demo.View.HandView
         /**
          * Updates hand position on view
          */
-        void ControlChangedHandler(object sender, KinectInputManagerEventArgs e)
+        void ControlChangedHandler(object sender, HandInputManagerEventArgs e)
         {
             // Type cast to conrete type
             HandControl handControl = (HandControl)userControl;
