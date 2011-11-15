@@ -23,7 +23,7 @@ namespace KinectControll.Demo.Controller.Startup
             control.Width = 525;
             control.Height = 525;
 
-            control.Multiplyer = 2;
+            control.Multiplyer = 3;
         }
     }
 }

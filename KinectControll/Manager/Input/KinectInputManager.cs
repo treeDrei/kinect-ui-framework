@@ -96,6 +96,7 @@ namespace KinectControll.Manager.Input
                 yValue = e.RightHand.Y;
             }
 
+            // Apply offste before usage
             xValue += (AlignmentModel.Instance.Offset.X);
             yValue += (AlignmentModel.Instance.Offset.Y);
             SetInput(xValue, yValue);
@@ -190,52 +191,6 @@ namespace KinectControll.Manager.Input
             cursor.Position = new Point(Cursor.Position.X - 50, Cursor.Position.Y - 50);
             //Mouse.OverrideCursor = Cursor.
              * */
-        }
-        
-        public void SetInputJoints(Joint leftHand, Joint rightHand)
-        {
-            double x = 0;
-            double y = 0;
-
-            Joint joint = rightHand;
-            // Check wich hand is further in front
-            if (leftHand.Position.Z < rightHand.Position.Z)
-            {
-                joint = leftHand;
-            }
- 
-            //x = ((rightHand.Position.X * width / 2) + width) * multiplyer;
-            //y = ((rightHand.Position.Y * height / 2) + height) * multiplyer;
-            //x = /*width - */((/*-1 * */rightHand.Position.X) * width);
-            //y = (/*height - */(rightHand.Position.Y * height)) /* added */ * -1;
-
-            y = height / 2 - (joint.Position.Y * height / 2);
-            x = width / 2 - ((-1 * joint.Position.X) * width / 2);
-            
-            x *= multiplyer;
-            y *= multiplyer;
-
-            
-            if (x < 0)
-            {
-                x = 0;
-            }
-            else if (x > width)
-            {
-                x = width;
-            }
-
-            if (y < 0)
-            {
-                y = 0;
-            }
-            else if (y > width)
-            {
-                y = height;
-            }
-
-            // Triggers event TEST
-            this.TriggerChanged(x, y);
         }
 
         #region Event
