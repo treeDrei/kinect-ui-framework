@@ -70,7 +70,7 @@ namespace KinectControll.Manager.Pose
             // head angle can be calculated with left and right angle. If left and right angles are correct, headn angle has to be also correct.
             //double angleHead = 180 - (angleLeft + angleRight);
 
-            Console.WriteLine("aL: " + angleLeft + ", aR: " + angleRight);
+            //Console.WriteLine("aL: " + angleLeft + ", aR: " + angleRight);
 
             // Check all poses 
             PoseModel.Instance.PoseList().ForEach
