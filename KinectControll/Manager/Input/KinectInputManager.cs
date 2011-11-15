@@ -47,12 +47,15 @@ namespace KinectControll.Manager.Input
             TriggerChanged(-100, -100);
         }
 
-        void FixedUpdateHandler(object sender, DataManagerEventArgs e)
+        /**
+         * Handles fixed update event
+         */
+        private void FixedUpdateHandler(object sender, DataManagerEventArgs e)
         {
             if (e.LeftHand != null && e.RightHand != null)
             {
                 // Left hand is in front but currently not main hand
-                if (e.LeftHand.Z > e.RightHand.Z && !isLeft)
+                if (e.LeftHand.Z < e.RightHand.Z && !isLeft)
                 {
                     directionChangeIndex++;
                     if (directionChangeIndex >= directionChangeThreshold)
@@ -62,12 +65,12 @@ namespace KinectControll.Manager.Input
                     }
                 }
                 // right hand in front but currently not main hand
-                else if (e.LeftHand.Z < e.RightHand.Z && isLeft)
+                else if (e.LeftHand.Z > e.RightHand.Z && isLeft)
                 {
                     directionChangeIndex++;
                     if (directionChangeIndex >= directionChangeThreshold)
                     {
-                        isLeft = true;
+                        isLeft = false;
                         directionChangeIndex = 0;
                     }
                 }
@@ -79,7 +82,10 @@ namespace KinectControll.Manager.Input
             }
         }
 
-        void UpdateHandler(object sender, DataManagerEventArgs e)
+        /**
+         * Handles regular update event
+         */
+        private void UpdateHandler(object sender, DataManagerEventArgs e)
         {
             double xValue = 0;
             double yValue = 0;
@@ -185,12 +191,6 @@ namespace KinectControll.Manager.Input
 
             // Triggers event TEST
             this.TriggerChanged(x, y);
-
-            /*
-            Cursor. cursor;// = new Cursor(Cursor.Current.Handle);
-            cursor.Position = new Point(Cursor.Position.X - 50, Cursor.Position.Y - 50);
-            //Mouse.OverrideCursor = Cursor.
-             * */
         }
 
         #region Event
