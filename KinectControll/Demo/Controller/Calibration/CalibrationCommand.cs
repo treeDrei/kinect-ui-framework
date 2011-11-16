@@ -16,7 +16,7 @@ namespace KinectControll.Demo.Controller.Calibration
     {
         public override void Execute(INotification notification)
         {
-            AlignmentController.CollectData();
+            AlignmentController.Arrange();
         }
     }
 }

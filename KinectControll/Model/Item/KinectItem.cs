@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 
 using System.Windows;
-using KinectControll.Manager.Item;
+using KinectControll.Model.Item;
 
-namespace KinectControll.Manager.Item
+namespace KinectControll.Model.Item
 {
     public class KinectItem
     {

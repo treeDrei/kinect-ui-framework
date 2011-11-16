@@ -10,7 +10,7 @@ using System.Windows.Media.Animation;
 // Reuired for duration
 using System.Windows;
 // Required foro kinect item handling
-using KinectControll.Manager.Item;
+using KinectControll.Model.Item;
 
 namespace KinectControll.Demo.View.BaseView
 {

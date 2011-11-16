@@ -16,8 +16,8 @@ using System.Windows.Shapes;
 using System.Windows.Media.Animation;
 
 using KinectControll.Manager;
-using KinectControll.Manager.Item;
-using KinectControll.Manager.Item.Selectable;
+using KinectControll.Model.Item;
+using KinectControll.Model.Item.Selectable;
 
 using KinectControll.Demo.View.MenuView.Event;
 
@@ -106,7 +106,7 @@ namespace KinectControll.Demo.View.CalibrationView
             // Retreive referenced object from buttons list
             Image button = (Image)buttons[selectable.GetID()];
             // Animate selection
-            DoubleAnimate(button, 70, 111);
+            DoubleAnimate(button, 70, 74);
         }
 
         /**
@@ -120,7 +120,7 @@ namespace KinectControll.Demo.View.CalibrationView
             Image button = (Image)buttons[selectable.GetID()];
 
             //ColorAnimate(button, Color.FromRgb(255, 255, 0), Color.FromRgb(0, 0, 0));
-            DoubleAnimate(button, 111, 70);
+            DoubleAnimate(button, 74, 70);
             // Debug output
             Console.WriteLine(selectable.GetID() + " deselected");
         }
@@ -138,7 +138,7 @@ namespace KinectControll.Demo.View.CalibrationView
             DoubleAnimation animation = new DoubleAnimation();
             animation.From = from;
             animation.To = to;
-            animation.Duration = new Duration(TimeSpan.FromSeconds(.5));
+            animation.Duration = new Duration(TimeSpan.FromSeconds(.3));
             animation.AutoReverse = false;
 
             button.BeginAnimation(Image.WidthProperty, animation);

@@ -34,6 +34,15 @@ namespace KinectControll.Demo.View.MenuView
             // Navigate to required view
             view.OnVisualizerNavigation += new EventHandler(VisualizerNavigationHandler);
             view.OnImageNavigation += new EventHandler(ImageNavigationHandler);
+            view.OnClose += new EventHandler(CloseHandler);
+        }
+
+        /**
+         * Will request an application close
+         */
+        private void CloseHandler(object sender, EventArgs e)
+        {
+            SendNotification(DemoApplicationFacade.APPLICATION_CLOSE);
         }
 
         /**

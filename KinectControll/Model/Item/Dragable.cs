@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace KinectControll.Manager.Item
+namespace KinectControll.Model.Item
 {
     /**
      * Dragable Class extends ItemDecorator

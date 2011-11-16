@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace KinectControll.Manager.Item.Swypeable.Event
+namespace KinectControll.Model.Item.Swypeable.Event
 {
     class KinectSwypeableEventArgs : EventArgs
     {

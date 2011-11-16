@@ -14,8 +14,8 @@ using System.Windows.Shapes;
 
 using System.Windows.Media.Animation;
 
-using KinectControll.Manager.Item;
-using KinectControll.Manager.Item.Swypable;
+using KinectControll.Model.Item;
+using KinectControll.Model.Item.Swypable;
 using KinectControll.Manager.Input;
 using KinectControll.Manager.Input.Event;
 

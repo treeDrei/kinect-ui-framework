@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using KinectControll.Manager.Input;
-using KinectControll.Manager.Item.Swypeable.Event;
+using KinectControll.Model.Input;
+using KinectControll.Model.Item.Swypeable.Event;
 
 using KinectControll.Check.Distance;
 
-namespace KinectControll.Manager.Item.Swypable
+namespace KinectControll.Model.Item.Swypable
 {
     /**
      * Dragable Class extends ItemDecorator
      */
     class KinectSwypeable2 : ItemDecorator
     {
-        HandInputManager input;
+        //HandInputManager input;
 
         // Stores count data to match threshold
         private int hitCount = 0;
@@ -33,7 +33,7 @@ namespace KinectControll.Manager.Item.Swypable
             : base(item)
         {
             distanceCheck = new DistanceCheck(sideDist, upDist);
-            input = HandInputManager.Instance;
+            //input = HandInputManager.Instance;
 
             hitThreshold = threshold;
         }
@@ -137,7 +137,7 @@ namespace KinectControll.Manager.Item.Swypable
             // This item has just been selected
             isSelected = true;
             // Start distance check from current input point
-            distanceCheck.Start = input.Current;
+            distanceCheck.Start = InputModel.Instance.Current;
         }
 
         /**
@@ -146,7 +146,7 @@ namespace KinectControll.Manager.Item.Swypable
         private void ProgressInput()
         {
             // If check is complete
-            if (distanceCheck.SetCurrent(input.Current))
+            if (distanceCheck.SetCurrent(InputModel.Instance.Current))
             {
                 isSelected = false;
                 TriggerSwypeComplete(EventArgs.Empty);

@@ -12,8 +12,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using Microsoft.Research.Kinect.Nui;
-
 using KinectControll.Demo.View.BaseView;
 using KinectControll.Manager;
 
@@ -30,13 +28,19 @@ namespace KinectControll.Demo.View.MainView
         {
             InitializeComponent();
 
-            this.Cursor = Cursors.None;
+            this.Cursor = System.Windows.Input.Cursors.None;
+            this.WindowState = System.Windows.WindowState.Maximized;
+            this.WindowStyle = WindowStyle.None;
+            this.ResizeMode = ResizeMode.NoResize;
+
+            // ResizeMode="NoResize" WindowStyle="None" WindowState="Maximized" Topmost="True" 
+            // Put it back in xaml for REAL full screen
         }
 
         /**
          * Adds a view to main window
          */
-        public void AddView(UserControl view)
+        public void AddView(System.Windows.Controls.UserControl view)
         {
             this.LayoutRoot.Children.Add(view);
         }

@@ -5,8 +5,6 @@ using System.Text;
 
 // Required to create new threads
 using System.Threading;
-//
-using KinectControll.Manager.Alignment;
 // 
 using KinectControll.Model.Threading;
 //
@@ -19,18 +17,22 @@ namespace KinectControll.Controller.Alignment
         /**
          * Collect data to base search on
          */
-        public static void CollectData()
+        public static void Arrange()
         {
-            AlignmentThread camPos = new AlignmentThread();
-            Thread camPosThread = new Thread(new ThreadStart(camPos.Run));
+            // Creates threadable class
+            AlignmentThread alignmentThread = new AlignmentThread();
+            // Tells thread wich function to run
+            Thread thread = new Thread(new ThreadStart(alignmentThread.Run));
 
-            ThreadModel.Instance.AddThread("camPos", camPosThread);
-            camPosThread.Start();
+            // if this function is called again, befor the thread has finished, it will be destroyed by model, because the identifyer is the same
+            ThreadModel.Instance.AddThread("alignmentThread", thread);
+            // Starts thread execution
+            thread.Start();
         }
 
         /**
          * Will seach for best camera angle 
-         */
+         *
         public static void AlignCamera()
         {
             // Choose best angle
@@ -38,10 +40,11 @@ namespace KinectControll.Controller.Alignment
 
         /**
          * Will enforce an offset on user input to center his position
-         */
+         *
         public static void AlignUser()
         {
             // Set user offset
         }
+        */
     }
 }

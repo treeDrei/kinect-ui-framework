@@ -36,12 +36,21 @@ namespace KinectControll.Demo.View.DebugView
             view.Hide();
         }
 
+        /**
+         * Closes this window
+         */
         public void close()
         {
-            view.Close();
-            view = null;
+            if(view != null)
+            {
+                view.Close();
+                view = null;
+            }
         }
 
+        /**
+         * Will open a new window if it has been closed
+         */
         public void open()
         {
             if (view == null)

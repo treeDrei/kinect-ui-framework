@@ -6,8 +6,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="525" d:DesignWidth="525" HorizontalAlignment="Left" VerticalAlignment="Top" Name="MenuControlName">
     <Grid Name="BaseGrid">
-        <Image Height="70" HorizontalAlignment="Left" Margin="237,180,0,0" Name="visualizerButton" Stretch="Fill" VerticalAlignment="Top" Width="70" Source="/KinectControll;component/assets/img/image.png" />
-        <Image Height="70" HorizontalAlignment="Left" Margin="60,180,0,0" Name="imageButton" Stretch="Fill" VerticalAlignment="Top" Width="70" Source="/KinectControll;component/assets/img/video.png" />
-        <Image Height="70" HorizontalAlignment="Left" Margin="424,180,0,0" Name="image1" Source="/KinectControll;component/assets/Phone.png" Stretch="Fill" VerticalAlignment="Top" Width="70" />
+        <Image Height="70" HorizontalAlignment="Right" Margin="0,180,174,0" Name="visualizerButton" Stretch="Fill" VerticalAlignment="Top" Width="70" Source="/KinectControll;component/assets/img/image.png" />
+        <Image Height="70" HorizontalAlignment="Left" Margin="150,180,0,0" Name="imageButton" Stretch="Fill" VerticalAlignment="Top" Width="70" Source="/KinectControll;component/assets/img/video.png" />
+        <Image Height="70" HorizontalAlignment="Left" Margin="12,12,0,0" Name="closeButton" Stretch="Fill" VerticalAlignment="Top" Width="70" Source="/KinectControll;component/Images/closeButton.png" />
     </Grid>
 </UserControl>

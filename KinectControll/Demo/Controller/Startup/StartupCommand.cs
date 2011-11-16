@@ -28,9 +28,6 @@ namespace KinectControll.Demo.Controller.Startup
             // Register Debug view and mediator
             Facade.RegisterMediator(new DebugMediator(new DebugWindow()));
 
-            //Facade.RegisterProxy(new UserProxy());
-            //Facade.RegisterProxy(new RoleProxy());           
-
             // Get main window from payload
             MainWindow mainWindow = (MainWindow) note.Body;
             // Create main window if it hasn't been attached
@@ -47,10 +44,14 @@ namespace KinectControll.Demo.Controller.Startup
             SendNotification(DemoApplicationFacade.INITIALIZE_BACKGROUND_CONTROL);
             SendNotification(DemoApplicationFacade.INITIALIZE_BUTTONS_CONTROL);
             SendNotification(DemoApplicationFacade.INITIALIZE_IMAGE_VIEW);
+            SendNotification(DemoApplicationFacade.INITIALIZE_VISUALIZER_VIEW);
+
+            // Single overlay elements must be second heighest
             SendNotification(DemoApplicationFacade.INITIALIZE_HOME_VIEW);
             SendNotification(DemoApplicationFacade.INITIALIZE_POSE_VIEW);
             SendNotification(DemoApplicationFacade.INITIALIZE_CALIBRATION_VIEW);
-            SendNotification(DemoApplicationFacade.INITIALIZE_VISUALIZER_VIEW);
+
+            // Has to stay on top
             SendNotification(DemoApplicationFacade.INITIALIZE_HAND_VIEW);
         }
     }

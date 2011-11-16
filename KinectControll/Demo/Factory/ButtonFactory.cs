@@ -7,8 +7,8 @@ using System.Text;
 using System.Windows.Controls;
 
 // Item Manager
-using KinectControll.Manager.Item;
-using KinectControll.Manager.Item.Selectable;
+using KinectControll.Model.Item;
+using KinectControll.Model.Item.Selectable;
 
 namespace KinectControll.Demo.Factory
 {

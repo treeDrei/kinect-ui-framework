@@ -1,7 +1,8 @@
 ﻿<Window x:Class="KinectControll.Demo.View.MainView.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="525" Width="525" HorizontalAlignment="Left" VerticalAlignment="Top"
+        Title="Kinect" 
+        HorizontalAlignment="Left" VerticalAlignment="Top" Height="1920" Width="1080"
         xmlns:cc="clr-namespace:KinectControll.View.Component">
 
     <Grid x:Name="LayoutRoot" Visibility="Visible">

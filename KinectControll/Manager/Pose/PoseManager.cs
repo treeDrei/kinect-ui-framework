@@ -17,7 +17,7 @@ using KinectControll.Model.Pose;
 
 namespace KinectControll.Manager.Pose
 {
-    class PoseManager
+    class PoseManager: Manager, IManager
     {
         #region Singleton instantiation
         /**
@@ -100,6 +100,24 @@ namespace KinectControll.Manager.Pose
             {
                 var args = new PoseManagerEventArgs() { type = type };  // vary
                 handler(this, args);
+            }
+        }
+        #endregion
+
+        #region IManager implementation
+        public void Start()
+        {
+            if (!isStarted)
+            {
+                isStarted = true;
+            }
+        }
+
+        public void Stop()
+        {
+            if (isStarted)
+            {
+                isStarted = false;
             }
         }
         #endregion

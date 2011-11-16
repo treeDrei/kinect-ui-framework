@@ -16,8 +16,8 @@ using System.Windows.Shapes;
 using System.Windows.Media.Animation;
 
 using KinectControll.Manager;
-using KinectControll.Manager.Item;
-using KinectControll.Manager.Item.Selectable;
+using KinectControll.Model.Item;
+using KinectControll.Model.Item.Selectable;
 
 using KinectControll.Demo.View.MenuView.Event;
 

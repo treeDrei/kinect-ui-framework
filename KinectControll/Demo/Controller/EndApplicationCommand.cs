@@ -10,7 +10,10 @@ using KinectControll.Manager.Data;
 
 using Microsoft.Research.Kinect.Nui;
 
+// Required to use debug view
 using KinectControll.Demo.View.DebugView;
+// Required to close main window
+using KinectControll.Demo.View.MainView;
 
 // Required for thread manipulation
 using KinectControll.Controller.Threading;
@@ -23,8 +26,17 @@ namespace KinectControll.Demo.Controller
         {
             // Retrieve mediator instance from fassade
             DebugMediator debugMediator = (DebugMediator)Facade.RetrieveMediator("DebugMediator");
-            // Close debug window
-            debugMediator.close();
+            if (debugMediator != null)
+            {
+                // Close debug window
+                debugMediator.close();
+            }
+
+            MainMediator mainMediator = (MainMediator)Facade.RetrieveMediator(MainMediator.NAME);
+            if (mainMediator != null)
+            {
+                mainMediator.close();
+            }
 
             /*
             // Get kinect manager
