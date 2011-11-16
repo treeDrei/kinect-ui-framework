@@ -3,29 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using KinectControll.Manager.Item;
+using KinectControll.Model.Item;
 using KinectControll.Manager.Input;
 using KinectControll.Manager.Input.Event;
 
 namespace KinectControll.Manager
 {
-    public class CollisionManager
+    public class KinectCollisionManager: Manager, IManager
     {
-        HandInputManager input;
-        KinectItemManager items;
+        #region Private variables
+        private KinectItemManager items;
+        #endregion
 
         #region Singleton instantiation
         /**
          * Singleton can't be instantiated from outside
          */
-        private CollisionManager() 
+        private KinectCollisionManager() 
         {
-            input = HandInputManager.Instance;
             items = KinectItemManager.Instance;
-            input.OnChanged += new EventHandler<HandInputManagerEventArgs>(controlChangedHandler);
         }
 
-        public static CollisionManager Instance
+        public static KinectCollisionManager Instance
         {
             get
             {
@@ -39,25 +38,58 @@ namespace KinectControll.Manager
         private class SingletonCreator
         {
             static SingletonCreator() { }
-            internal static readonly CollisionManager instance = new CollisionManager();
+            internal static readonly KinectCollisionManager instance = new KinectCollisionManager();
         }
         #endregion
 
+        #region IManager implementation
+        /**
+         * Stops data handling
+         */
+        public void Start()
+        {
+            if (!isStarted)
+            {
+                isStarted = true;
+                HandInputManager.Instance.OnChanged += new EventHandler<HandInputManagerEventArgs>(controlChangedHandler);
+            }
+        }
+
+        /**
+         * Starts data handling
+         */
+        public void Stop()
+        {
+            if (isStarted)
+            {
+                isStarted = false;
+                HandInputManager.Instance.OnChanged -= new EventHandler<HandInputManagerEventArgs>(controlChangedHandler);
+            }
+        }
+        #endregion
+
+        #region Event handling
         /**
          * Handles controll update
          */
-        void controlChangedHandler(object sender, HandInputManagerEventArgs e)
+        private void controlChangedHandler(object sender, HandInputManagerEventArgs e)
         {
             // Run throuhg enabled items. No point in checking the rest.
             items.Enabled.ForEach(delegate(KinectItem item)
-            {    
+            {
                 if (e.xPos < item.GetX() + item.GetWidth() && e.xPos > item.GetX())
                 {
                     // Horizontal match
                     item.SetHit(e.yPos > item.GetY() && e.yPos < item.GetY() + item.GetHeight());
+                    //Console.WriteLine(item.GetID() + ": " + item.GetY() + ", " + item.GetHeight() + " - " + e.yPos + " | " + (e.yPos > item.GetY()) + " | " + (e.yPos < item.GetY() + item.GetHeight()) + " -> " + (e.yPos > item.GetY() && e.yPos < item.GetY() + item.GetHeight()));
+                }
+                else
+                {
+                    item.SetHit(false);
                 }
                 
             });
         }
+        #endregion
     }
 }

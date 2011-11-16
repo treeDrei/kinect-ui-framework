@@ -16,8 +16,8 @@ using System.Windows.Shapes;
 using System.Windows.Media.Animation;
 
 using KinectControll.Manager;
-using KinectControll.Manager.Item;
-using KinectControll.Manager.Item.Selectable;
+using KinectControll.Model.Item;
+using KinectControll.Model.Item.Selectable;
 
 using KinectControll.Demo.View.MenuView.Event;
 
@@ -29,7 +29,7 @@ using KinectControll.Check.Speed;
 using KinectControll.Check.Move;
 using KinectControll.Check.Distance;
 // Required for swypable
-using KinectControll.Manager.Item.Swypable;
+using KinectControll.Model.Item.Swypable;
 
 namespace KinectControll.Demo.View.ImageView
 {

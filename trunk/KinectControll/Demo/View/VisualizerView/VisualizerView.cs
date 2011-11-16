@@ -18,12 +18,16 @@ using System.Windows.Media.Animation;
 using KinectControll.Demo.Factory;
 
 using KinectControll.Manager;
-using KinectControll.Manager.Item;
-using KinectControll.Manager.Item.Selectable;
+using KinectControll.Model.Item;
+using KinectControll.Model.Item.Selectable;
 
 using KinectControll.Demo.View.MenuView.Event;
 
 using KinectControll.Demo.View.BaseView;
+
+// Required for rectangle
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace KinectControll.Demo.View.VisualizerView
 {
@@ -39,7 +43,7 @@ namespace KinectControll.Demo.View.VisualizerView
         public VisualizerView()
             : base("VisualizerView", new HomeControl())
         {
-            images = 23;
+            images = 36;
             CreateImages(images);
 
             buttons = new Dictionary<string, UIElement>();
@@ -48,7 +52,14 @@ namespace KinectControll.Demo.View.VisualizerView
             HomeControl visualizerControl = (HomeControl)userControl;
 
             CreateButton("leftButton", visualizerControl.leftButton);
+
+            // Move button before using its psoition as reference
+            double marginLeft = Screen.PrimaryScreen.Bounds.Width - visualizerControl.leftButton.Margin.Left - visualizerControl.rightButton.Width - 400;
+            visualizerControl.rightButton.Margin = new Thickness(marginLeft, visualizerControl.rightButton.Margin.Top, 0, 0);
+
             CreateButton("rightButton", visualizerControl.rightButton);
+
+            
         }
 
         #region Component Initialization
@@ -59,7 +70,16 @@ namespace KinectControll.Demo.View.VisualizerView
             {
                 BitmapImage bitmapImage = new BitmapImage();
                 bitmapImage.BeginInit();
-                bitmapImage.UriSource = new Uri("/Images/360_"+i+".png", UriKind.Relative);
+                String path = "/Images/";
+                if (i < 9)
+                {
+                    path += "0";
+                }
+                path += (i + 1) + ".png";
+
+                Console.WriteLine("Path: " + path);
+
+                bitmapImage.UriSource = new Uri(path, UriKind.Relative);
                 bitmapImage.EndInit();
 
                 bitmapImages[i] = bitmapImage;
@@ -67,25 +87,29 @@ namespace KinectControll.Demo.View.VisualizerView
 
             HomeControl visualizerControl = (HomeControl)userControl;
             visualizerControl.image1.Source = bitmapImages[4];
+            visualizerControl.image1.Height = 897;
         }
 
         /**
          * Creates a button
          */
-        private void CreateButton(String name, Image button)
+        private void CreateButton(String name, System.Windows.Controls.Image button)
         {
             KinectHoldable holdable = ButtonFactory.CreateHoldButton(name, button,3);
             buttons.Add(name, button);
 
             // Add event listeners
-            holdable.OnSelection += new EventHandler(SelectionHandler);
-            //holdable.OnDeselection += new EventHandler(ButtonDeselectedHandler);
+            holdable.OnSelection += new EventHandler(HoldHandler);
+
+            KinectSelectable selectable = ButtonFactory.CreateSelectionButton(name, button, 3, holdable);
+            selectable.OnSelection +=new EventHandler(SelectionHandler);
+            selectable.OnDeselection += new EventHandler(DeselectionHandler);
                         
             // Adds item
             KinectItemManager items = KinectItemManager.Instance;
-            items.RegisterItem(holdable);
+            items.RegisterItem(selectable);
 
-            itemList.Add(holdable);
+            itemList.Add(selectable);
         }
         #endregion
 
@@ -93,12 +117,12 @@ namespace KinectControll.Demo.View.VisualizerView
         /**
          * Handles button selection event
          */
-        void SelectionHandler(object sender, EventArgs e)
+        void HoldHandler(object sender, EventArgs e)
         {
             // Start rotation
             KinectHoldable selectable = (KinectHoldable)sender;
             // Retreive referenced object from buttons list
-            Image button = (Image)buttons[selectable.GetID()];
+            System.Windows.Controls.Image button = (System.Windows.Controls.Image)buttons[selectable.GetID()];
 
             HomeControl visualizerControl = (HomeControl)userControl;
             
@@ -128,20 +152,56 @@ namespace KinectControll.Demo.View.VisualizerView
         }
 
         /**
-         * Handles button deselection event
-         *
-        void ButtonDeselectedHandler(object sender, EventArgs e)
+       * Handles button selection event
+       */
+        private void SelectionHandler(object sender, EventArgs e)
         {
-            // Stop rotation
+            // Sender is a Selectable
+            KinectSelectable selectable = (KinectSelectable)sender;
+
+            // Retreive referenced object from buttons list
+            System.Windows.Controls.Image button = (System.Windows.Controls.Image)buttons[selectable.GetID()];
+            // Animate selection
+            ScaleAnimate(button, 100, 105);
         }
+
+        /**
+         * Handles button deselection event
          */
+        private void DeselectionHandler(object sender, EventArgs e)
+        {
+            // Sender is a selectable
+            KinectSelectable selectable = (KinectSelectable)sender;
+            // Get image from buttons list by its id
+            System.Windows.Controls.Image button = (System.Windows.Controls.Image)buttons[selectable.GetID()];
+
+            ScaleAnimate(button, 105, 100);
+        }
         #endregion
 
         #region Animation
         /**
          * Animates size
          */
-        private void FadeAnimate(Image button, int from, int to)
+        private void ScaleAnimate(System.Windows.Controls.Image button, int from, int to)
+        {
+            DoubleAnimation positionAnimation = new DoubleAnimation();
+            //positionAnimation.From = ;
+
+            DoubleAnimation animation = new DoubleAnimation();
+            animation.From = from;
+            animation.To = to;
+            animation.Duration = new Duration(TimeSpan.FromSeconds(.3));
+            animation.AutoReverse = false;
+
+            button.BeginAnimation(System.Windows.Controls.Image.WidthProperty, animation);
+            button.BeginAnimation(System.Windows.Controls.Image.HeightProperty, animation);
+        }
+
+        /**
+         * Animates size
+         */
+        private void FadeAnimate(System.Windows.Controls.Image button, int from, int to)
         {
             DoubleAnimation positionAnimation = new DoubleAnimation();
             //positionAnimation.From = ;
@@ -152,7 +212,7 @@ namespace KinectControll.Demo.View.VisualizerView
             animation.Duration = new Duration(TimeSpan.FromSeconds(0));
             animation.AutoReverse = false;
 
-            button.BeginAnimation(Image.OpacityProperty, animation);
+            button.BeginAnimation(System.Windows.Controls.Image.OpacityProperty, animation);
 
         }
         #endregion

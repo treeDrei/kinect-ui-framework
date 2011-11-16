@@ -16,12 +16,14 @@ using System.Windows.Shapes;
 using System.Windows.Media.Animation;
 
 using KinectControll.Manager;
-using KinectControll.Manager.Item;
-using KinectControll.Manager.Item.Selectable;
+using KinectControll.Model.Item;
+using KinectControll.Model.Item.Selectable;
 
 using KinectControll.Demo.View.MenuView.Event;
 
 using KinectControll.Demo.View.BaseView;
+
+using KinectControll.Demo.Factory;
 
 namespace KinectControll.Demo.View.MenuView
 {
@@ -33,7 +35,12 @@ namespace KinectControll.Demo.View.MenuView
         // Event allowing to register on it
         public event EventHandler OnVisualizerNavigation;
         public event EventHandler OnImageNavigation;
-        
+        public event EventHandler OnClose;
+
+        private const String IMAGE_NAME = "imageButton";
+        private const String VISUALIZER_NAME = "visualizerButton";
+        private const String CLOSE_NAME = "closeButton";
+
         public MenuView()
             : base("MenuView", new MenuControl())
         {
@@ -43,16 +50,44 @@ namespace KinectControll.Demo.View.MenuView
             MenuControl menuControl = (MenuControl)userControl;
 
             //phoneButton = new ImageButton("phoneButton");
-            CreateButton("imageButton", menuControl.imageButton);
+            CreateMenuButton(IMAGE_NAME, menuControl.imageButton);
             //questionButton = new ImageButton("questionButton");
-            CreateButton("visualizerButton", menuControl.visualizerButton);   
+            CreateMenuButton(VISUALIZER_NAME, menuControl.visualizerButton);
+
+            CreateCloseButton();
         }
 
         #region Component Initialization
+
+        /**
+         * Creates a close button
+         */
+        private void CreateCloseButton()
+        {
+            MenuControl menuControl = (MenuControl)userControl;
+    
+            KinectSelectable selection = ButtonFactory.CreateSelectionButton("closeButton", menuControl.closeButton, 5);
+            buttons.Add(selection.GetID(), menuControl.closeButton);
+
+            // Add event listeners
+            selection.OnSelection += new EventHandler(CloseSelectionHandler);
+            selection.OnDeselection += new EventHandler(CloseDeselectionHandler);
+
+            // Navigation will happen later then selection
+            KinectSelectable close = new KinectSelectable(selection, 20);
+            close.OnSelection += new EventHandler(NavigationHandler);
+
+            // Adds item
+            KinectItemManager items = KinectItemManager.Instance;
+            items.RegisterItem(close);
+
+            itemList.Add(close);
+        }
+        
         /**
          * Creates a button
          */
-        private void CreateButton(String name, Image button)
+        private void CreateMenuButton(String name, Image button)
         {
             // Button1 item
             KinectItem item = new KinectItem(name, button.Margin.Left, button.Margin.Top, button.Width, button.Height);
@@ -80,21 +115,30 @@ namespace KinectControll.Demo.View.MenuView
         * Event dispatch trigger
         * Fill with EventArgs.Empty if nothing is beeing attached
         */
-        protected virtual void TriggerVisualizerNavigation(MenuEventArgs e)    // the Trigger
+        protected virtual void TriggerVisualizerNavigation()    // the Trigger
         {
             EventHandler handler = OnVisualizerNavigation;   // make a copy to be more thread-safe
             if (handler != null)
             {
-                handler(this, e);
+                handler(this, EventArgs.Empty);
             }
         }
 
-        protected virtual void TriggerImageNavigation(MenuEventArgs e)    // the Trigger
+        protected virtual void TriggerImageNavigation()    // the Trigger
         {
             EventHandler handler = OnImageNavigation;   // make a copy to be more thread-safe
             if (handler != null)
             {
-                handler(this, e);
+                handler(this, EventArgs.Empty);
+            }
+        }
+
+        protected virtual void TriggerClose()    // the Trigger
+        {
+            EventHandler handler = OnClose;   // make a copy to be more thread-safe
+            if (handler != null)
+            {
+                handler(this, EventArgs.Empty);
             }
         }
         #endregion
@@ -106,20 +150,17 @@ namespace KinectControll.Demo.View.MenuView
             // Sender is a Selectable
             KinectSelectable selectable = (KinectSelectable)sender;
 
-            // Argumaents will tell wich button has been selected
-            MenuEventArgs args = new MenuEventArgs();
-            // This is a test
-            args.ViewID = "Test";
-            
-            // Triggers image navigation
-            if (selectable.GetID() == "imageButton")
+            switch (selectable.GetID())
             {
-                TriggerImageNavigation(args);
-            }
-            // Trigger vidieo navigation
-            else if (selectable.GetID() == "visualizerButton")
-            {
-                TriggerVisualizerNavigation(args);
+                case IMAGE_NAME:
+                    TriggerImageNavigation();
+                    break;
+                case VISUALIZER_NAME:
+                    TriggerVisualizerNavigation();
+                    break;
+                case CLOSE_NAME:
+                    TriggerClose();
+                    break;
             }
         }
 
@@ -134,13 +175,12 @@ namespace KinectControll.Demo.View.MenuView
             // Retreive referenced object from buttons list
             Image button = (Image)buttons[selectable.GetID()];
             // Animate selection
-            DoubleAnimate(button, 70, 111);
-            // Debug output
-            Console.WriteLine(selectable.GetID() + " selected");
+            DoubleAnimate(button, 105, 111);
         }
 
         /**
          * Handles button deselection event
+         * Close animation differs from menu animation
          */
         void DeselectionHandler(object sender, EventArgs e)
         {
@@ -150,9 +190,34 @@ namespace KinectControll.Demo.View.MenuView
             Image button = (Image)buttons[selectable.GetID()];
 
             //ColorAnimate(button, Color.FromRgb(255, 255, 0), Color.FromRgb(0, 0, 0));
-            DoubleAnimate(button, 111, 70);
-            // Debug output
-            Console.WriteLine(selectable.GetID() + " deselected");
+            DoubleAnimate(button, 111, 105);
+        }
+
+        /**
+         * Handles button selection event
+         */
+        void CloseSelectionHandler(object sender, EventArgs e)
+        {
+            // Sender is a Selectable
+            KinectSelectable selectable = (KinectSelectable)sender;
+
+            // Retreive referenced object from buttons list
+            Image button = (Image)buttons[selectable.GetID()];
+            // Animate selection
+            DoubleAnimate(button, 70, 75);
+        }
+
+        /**
+         * Handles button deselection event
+         */
+        void CloseDeselectionHandler(object sender, EventArgs e)
+        {
+            // Sender is a selectable
+            KinectSelectable selectable = (KinectSelectable)sender;
+            // Get image from buttons list by its id
+            Image button = (Image)buttons[selectable.GetID()];
+
+            DoubleAnimate(button, 75, 70);
         }
         #endregion
 

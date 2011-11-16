@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace KinectControll.Manager.Item
+namespace KinectControll.Model.Item
 {
     class KinectItemManager
     {
@@ -92,6 +92,5 @@ namespace KinectControll.Manager.Item
             }
         }
         #endregion
-
     }
 }

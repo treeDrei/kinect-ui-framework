@@ -58,5 +58,13 @@ namespace KinectControll.Demo.View.MainView
             // Adds user control to main window
             view.AddView(kinectView.GetUSerControl());
         }
+
+        /**
+         * Will close main window
+         */
+        public void close()
+        {
+            view.Close();
+        }
     }
 }

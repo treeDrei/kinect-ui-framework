@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using KinectControll.Manager.Input;
-using KinectControll.Manager.Item.Swypeable.Event;
+using KinectControll.Model.Input;
+using KinectControll.Model.Item.Swypeable.Event;
 
 // Required for distance / speed check
 using KinectControll.Check.Move;
 
-namespace KinectControll.Manager.Item.Swypable
+namespace KinectControll.Model.Item.Swypable
 {
     /**
      * Dragable Class extends ItemDecorator
      */
     class KinectSwypeable : ItemDecorator
     {
-        private HandInputManager UserInputManager;
-    
-        private MoveCheck moveCheck;
+        #region Private variables
+        private MoveCheck _moveCheck;
+        #endregion
 
         /**
          * Super contructor is called by : base(value)
@@ -27,9 +27,7 @@ namespace KinectControll.Manager.Item.Swypable
             : base(item)
         {
             // Speed and distance will make up a gesture
-            this.moveCheck = moveCheck;
-            
-            UserInputManager = HandInputManager.Instance;
+            this._moveCheck = moveCheck;          
         }
 
         
@@ -57,7 +55,7 @@ namespace KinectControll.Manager.Item.Swypable
         override public void SetHit(Boolean value)
         {
             //Check wether speed paraneters have been met
-            if (moveCheck.SetCurrent(UserInputManager.Current))
+            if (_moveCheck.SetCurrent(InputModel.Instance.Current))
             {
                 // If parameters have been met
                 TriggerSwypeComplete(EventArgs.Empty);

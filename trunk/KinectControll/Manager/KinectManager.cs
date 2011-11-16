@@ -9,20 +9,21 @@ using KinectControll.Pattern;
 
 using KinectControll.Manager.Input;
 using KinectControll.Manager.Pose;
-using KinectControll.Manager.Alignment;
 using KinectControll.Manager.Data;
+
+using KinectControll.Model.Pose;
 
 // Required for Alignment manipulation
 using KinectControll.Controller.Alignment;
 
 namespace KinectControll.Manager
 {
-    public class KinectManager
+    public class KinectManager : Manager, IManager
     {
         // Control Manager handles hand position and decides wich one to use
         private HandInputManager UserInputManager;
         // Collision Manager handles control collision with items
-        private CollisionManager collisionManager;
+        private KinectCollisionManager collisionManager;
         // Pose manager analysisi angles between head and both hands to check for poses
         private PoseManager poseManager;
         // Data manager 
@@ -33,61 +34,24 @@ namespace KinectControll.Manager
          */
         public KinectManager()
         {
-
+            // Create required managers
             kinectDataManager = SDKDataManager.Instance;
-            // Start data output
-            kinectDataManager.Start();
-            // Creates input manager
             UserInputManager = HandInputManager.Instance;
-            UserInputManager.Start();
-            // Creates pose manager
             
             poseManager = PoseManager.Instance;
-            //poseManager.CalculateAngles(0, 20, -10, 0, 10, 0);
-            /*
-            KinectPoseItem idleItem = poseManager.RegisterPose(new Idle());
+            PoseItem idleItem = PoseModel.Instance.RegisterPose(new IdlePose());
+
             // Event handling for idle events
             idleItem.OnPoseBegin += new EventHandler(IdleBeginHandler);
             idleItem.OnPoseComplete += new EventHandler(IdleEndHandler);
-            idleItem.OnPoseFailed +=new EventHandler(IdleEndHandler);
-            */
-
-            // Creates collision manager
-            collisionManager = CollisionManager.Instance;
-
-            //Initialize();
-
-            // Create alignment manager
-            /*
-            alignmentManager = KinectAlignmentManager.Instance;
-            alignmentManager.OnAlignmentRequest += new EventHandler(AlignmentRequestHandler);
-
-            alignmentManager.Arrange();
-             */
-
-            // Call of static function to request camera alignment
-            AlignmentController.CollectData();
+            idleItem.OnPoseFailed += new EventHandler(IdleEndHandler);
+            
+            collisionManager = KinectCollisionManager.Instance;
         }
 
         /**
-         * Enables position output
-         */
-        void IdleEndHandler(object sender, EventArgs e)
-        {
-            UserInputManager.Start();
-        }
-
-        /**
-         * Disables position output on idle begin
-         */
-        private void IdleBeginHandler(object sender, EventArgs e)
-        {
-            UserInputManager.Stop();
-        }
-
-        /**
-         * Thread safe singleton intsantiation
-         */
+        * Thread safe singleton intsantiation
+        */
         public static KinectManager Instance
         {
             get
@@ -104,5 +68,60 @@ namespace KinectControll.Manager
                 return null;
             }
         }
+
+        #region Event handling
+        /**
+         * Enables position output
+         */
+        void IdleEndHandler(object sender, EventArgs e)
+        {
+            UserInputManager.Start();
+        }
+
+        /**
+         * Disables position output on idle begin
+         */
+        private void IdleBeginHandler(object sender, EventArgs e)
+        {
+            UserInputManager.Stop();
+        }
+        #endregion
+        
+        #region IManager implementation
+        /**
+         * Starts all managers
+         */
+        public void Start()
+        {
+            if (!isStarted)
+            {
+                isStarted = true;
+
+                // Start all managers
+                kinectDataManager.Start();
+                UserInputManager.Start();
+                poseManager.Start();
+                collisionManager.Start();
+
+            }
+        }
+
+        /**
+         * Stops all managers
+         */
+        public void Stop()
+        {
+            if (isStarted)
+            {
+                isStarted = false;
+
+                // Stop all managers
+                kinectDataManager.Stop();
+                UserInputManager.Stop();
+                poseManager.Stop();
+                collisionManager.Stop();
+            }
+        }
+        #endregion
     }
 }

@@ -20,7 +20,7 @@ namespace KinectControll.Demo.Controller.Startup
             // Background Control view initialization
             VisualizerView view = new VisualizerView();
             VisualizerMediator mediator = new VisualizerMediator(view);
-            mediator.Hide();
+            //mediator.Hide();
 
             // Reguister mediator to allow later retreival
             Facade.RegisterMediator(mediator);

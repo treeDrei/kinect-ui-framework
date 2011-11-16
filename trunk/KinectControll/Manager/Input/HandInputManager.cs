@@ -14,13 +14,19 @@ using KinectControll.Manager.Data;
 using System.Windows.Input;
 
 using KinectControll.Model.Alignment;
+using KinectControll.Model.Input;
 
 namespace KinectControll.Manager.Input
 {
-    public class HandInputManager
+    public class HandInputManager: IManager
     {
+        #region Private variables
         private Boolean isStarted = false;
-         
+        // Counts number of right
+        private int directionChangeIndex = 0;
+        private int directionChangeThreshold = 4;
+        #endregion
+
         #region Singleton instantiation
         /**
          * Nested calss can only be called by ItemManager
@@ -39,7 +45,7 @@ namespace KinectControll.Manager.Input
         }
         #endregion
         /**
-         * Singleton can't be instantiated from outside
+         * Singleton shuldnt't be instantiated from outside
          */
         private HandInputManager() 
         {
@@ -52,10 +58,13 @@ namespace KinectControll.Manager.Input
          */
         private void FixedUpdateHandler(object sender, DataManagerEventArgs e)
         {
+            InputModel model = InputModel.Instance;
+            Boolean isLeft = InputModel.Instance.IsLeft;
+
             if (e.LeftHand != null && e.RightHand != null)
             {
                 // Left hand is in front but currently not main hand
-                if (e.LeftHand.Z < e.RightHand.Z && !isLeft)
+                if (e.LeftHand.Z < e.RightHand.Z && ! isLeft)
                 {
                     directionChangeIndex++;
                     if (directionChangeIndex >= directionChangeThreshold)
@@ -80,6 +89,8 @@ namespace KinectControll.Manager.Input
                     directionChangeIndex = 0;
                 }
             }
+
+            model.IsLeft = isLeft;
         }
 
         /**
@@ -87,16 +98,17 @@ namespace KinectControll.Manager.Input
          */
         private void UpdateHandler(object sender, DataManagerEventArgs e)
         {
+            InputModel model = InputModel.Instance;
             double xValue = 0;
             double yValue = 0;
             // Use values accoring to used hand
-            if (isLeft && e.LeftHand != null)
+            if (model.IsLeft && e.LeftHand != null)
             {
                 xValue = e.LeftHand.X;
                 yValue = e.LeftHand.Y;
             }
             // Can't be updated if data is null
-            else if(!isLeft && e.RightHand != null)
+            else if(!model.IsLeft && e.RightHand != null)
             {
                 xValue = e.RightHand.X;
                 yValue = e.RightHand.Y;
@@ -145,48 +157,34 @@ namespace KinectControll.Manager.Input
             }
         }
 
-        // Debug info will be dispatched if debug is enabled
-        
-        // Width and hight are beeing used for manipulation calculation
-        private double width = 500;
-        private double height = 500;
-
-        // Counts number of right
-        private int directionChangeIndex = 0;
-        private int directionChangeThreshold = 4;
-        private Boolean isLeft = true;
-
-        // Multiply user input to enhance distance with movement
-        private double multiplyer = 1;
-
-        private Point point;
-
         public void SetInput(double handX, double handY)
         {
             // Conrete x/y value on application
             double x = 0;
             double y = 0;
 
+            InputModel inputModel = InputModel.Instance; 
+            
             // Conversion from normateds value to 
-            x = (multiplyer * .5 * handX + .5) * width;
-            y = (multiplyer * - .5 * handY + .5) * height;
+            x = (inputModel.Multiplyer * .5 * handX + .5) * inputModel.Width;
+            y = (inputModel.Multiplyer * -.5 * handY + .5) * inputModel.Height;
 
             if (x < 0)
             {
                 x = 0;
             }
-            else if (x > width)
+            else if (x > inputModel.Width)
             {
-                x = width;
+                x = inputModel.Width;
             }
 
             if (y < 0)
             {
                 y = 0;
             }
-            else if (y > width)
+            else if (y > inputModel.Height)
             {
-                y = height;
+                y = inputModel.Height;
             }
 
             // Triggers event TEST
@@ -202,7 +200,7 @@ namespace KinectControll.Manager.Input
          */
         protected virtual void TriggerChanged(double x, double y)
         {
-            point = new Point(x, y);
+            InputModel.Instance.Current = new Point(x, y);
             // This copy will make it more thread-safe
             EventHandler<HandInputManagerEventArgs> handler = OnChanged;   
             if (handler != null)
@@ -212,62 +210,5 @@ namespace KinectControll.Manager.Input
             }
         }
         #endregion
-
-        /**
-         * Current selection 
-         */
-        public Point Current
-        {
-            get
-            {
-                return point;
-            }
-        }
-
-        /**
-         * Height getter
-         */
-        public double Width
-        {
-            get
-            {
-                return width;
-            }
-            set
-            {
-                width = value;
-            }
-        }
-
-
-        /**
-         * Height set & get
-         */
-        public double Height
-        {
-            get
-            {
-                return height;
-            }
-            set
-            {
-                height = value;
-            }
-        }
-
-        /**
-         * Height set & get
-         */
-        public double Multiplyer
-        {
-            get
-            {
-                return multiplyer;
-            }
-            set
-            {
-                multiplyer = value;
-            }
-        }
     }
 }

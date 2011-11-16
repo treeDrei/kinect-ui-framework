@@ -16,8 +16,8 @@ using System.Windows.Shapes;
 using System.Windows.Media.Animation;
 
 using KinectControll.Manager;
-using KinectControll.Manager.Item;
-using KinectControll.Manager.Item.Selectable;
+using KinectControll.Model.Item;
+using KinectControll.Model.Item.Selectable;
 
 using KinectControll.Demo.View.MenuView.Event;
 
@@ -77,8 +77,9 @@ namespace KinectControll.Demo.View.HomeView
         * Event dispatch trigger
         * Fill with EventArgs.Empty if nothing is beeing attached
         */
-        protected virtual void TriggerNavigation(MenuEventArgs e)    // the Trigger
+        protected virtual void TriggerNavigation()    // the Trigger
         {
+            EventArgs e = EventArgs.Empty;
             EventHandler handler = OnNavigation;   // make a copy to be more thread-safe
             if (handler != null)
             {
@@ -91,15 +92,8 @@ namespace KinectControll.Demo.View.HomeView
         #region Event Handling
         void NavigationHandler(object sender, EventArgs e)
         {
-            // Sender is a Selectable
-            KinectSelectable selectable = (KinectSelectable)sender;
-
-            // Argumaents will tell wich button has been selected
-            MenuEventArgs args = new MenuEventArgs();
-            // This is a test
-            args.ViewID = "Test";
             // Triggers event
-            TriggerNavigation(args);
+            TriggerNavigation();
         }
 
         /**
@@ -113,7 +107,7 @@ namespace KinectControll.Demo.View.HomeView
             // Retreive referenced object from buttons list
             Image button = (Image)buttons[selectable.GetID()];
             // Animate selection
-            DoubleAnimate(button, 70, 111);
+            DoubleAnimate(button, 70, 74);
             // Debug output
             Console.WriteLine(selectable.GetID() + " selected");
         }
@@ -128,8 +122,7 @@ namespace KinectControll.Demo.View.HomeView
             // Get image from buttons list by its id
             Image button = (Image)buttons[selectable.GetID()];
 
-            //ColorAnimate(button, Color.FromRgb(255, 255, 0), Color.FromRgb(0, 0, 0));
-            DoubleAnimate(button, 111, 70);
+            DoubleAnimate(button, 74, 70);
             // Debug output
             Console.WriteLine(selectable.GetID() + " deselected");
         }
